@@ -1,0 +1,147 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* mixins, variables, etc. */
+
+$gray-medium-light: #eaeaea;
+
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* universal */
+
+* {
+  border-radius: 0 !important;
+}
+
+body {
+  padding-top: 80px;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+  h1 {
+    margin-bottom: 10px;
+  }
+}
+
+
+/* centered columns styles */
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+
+
+
+
+.dark-background {
+  background-color: black;
+}
+
+.navbar-brand
+{
+    position: absolute;
+    width: 100%;
+    left: 26px;
+    text-align: center;
+    margin: auto;
+    padding-top: 0px;
+}
+
+
+
+.navbar-fixed-top {
+  min-height: 65px;
+}
+
+.navbar-nav li a {
+ line-height: 50px;
+}
+
+
+.thumbnail {
+  height: 560px;
+  min-height: 560px;
+  min-width: 460px;
+  display: table-cell!important;
+  vertical-align:middle;
+
+
+}
+
+
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
+.container-table {
+    display: table;
+}
+
+.vertical-center-row {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* non collapseable navbar ? */
+
+.navbar-collapse.collapse {
+display: block!important;
+}
+
+.navbar-nav>li, .navbar-nav {
+float: left !important;
+}
+
+.navbar-nav.navbar-right:last-child {
+margin-right: -15px !important;
+}
+
+.navbar-right {
+float: right!important;
+}
+
+
+
+
+
+
+
+
+
