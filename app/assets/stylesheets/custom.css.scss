@@ -84,8 +84,8 @@ textarea {
   min-height: 560px;
   min-width: 460px;
   display: table-cell!important;
-  vertical-align:middle;
-
+  vertical-align:bottom;
+  padding-bottom: 0px;
 
 }
 
@@ -104,6 +104,28 @@ textarea {
     display: table-cell;
     vertical-align: middle;
 }
+
+
+
+.upload {
+  vertical-align: bottom;
+  padding-bottom: 0px;
+
+}
+
+.glyphicon-plus {
+  font-size: 1.6em;
+}
+
+.glyphicon-ok {
+  font-size: 1.6em;
+}
+
+
+
+
+
+
 
 
 

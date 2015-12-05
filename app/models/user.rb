@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   store_accessor :preferences
   has_one :transformation
   has_many :pictures
+  has_many :workouts
 
 
   def to_param

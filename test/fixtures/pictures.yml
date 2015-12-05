@@ -2,8 +2,10 @@
 
 one:
   caption: MyString
+  attachment: MyString
   user_id: 
 
 two:
   caption: MyString
+  attachment: MyString
   user_id: 
