@@ -44,7 +44,7 @@ gem 'net-ssh'
 
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'fog',                     '1.23.0'
-gem "rmagick", :require => 'RMagick'
+gem "rmagick", :require => 'rmagick'
 
 
 
