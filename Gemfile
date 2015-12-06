@@ -46,7 +46,8 @@ gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'fog',                     '1.23.0'
 gem "rmagick", :require => 'rmagick'
 
-
+gem 'rails_12factor', '0.0.2'
+gem 'puma',           '2.11.1'
 
 
 
