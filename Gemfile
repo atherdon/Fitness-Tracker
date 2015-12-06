@@ -43,7 +43,7 @@ gem 'test-unit'
 gem 'net-ssh'
 
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
-gem 'fog-aws'
+gem "fog"
 gem "rmagick", :require => 'rmagick'
 
 gem 'rails_12factor', group: :production
