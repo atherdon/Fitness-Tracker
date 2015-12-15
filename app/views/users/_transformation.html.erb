@@ -7,6 +7,11 @@
 			<div class="thumbnail">
 				
 				<div class="before-upload">
+
+					<% if @user.before? %>
+						<%= image_tag Picture.where(id: current_user.before).url(:index) %>
+					<% else %>
+
 					<%= form_for @picture, url: pictures_path, method: :post, :authenticity_token => true, html: { multipart: true }, remote: true do |f| %>
 
 	        <label for="inputFileBefore", class="glyphicon glyphicon-plus", id= "beforeinput" %></label>
@@ -18,12 +23,13 @@
 	        <%= f.submit "Upload", class:"btn btn-info" %>
 	        </span>
 	        <% end %>
+     			<%= link_to image_tag("zyzz.jpg"), root_path %>
 
-	        
-	        
+     			<% end %>
+
        	</div>
         
-        <%= link_to image_tag("zyzz.jpg"), root_path %>
+        
 
 
 			</div>

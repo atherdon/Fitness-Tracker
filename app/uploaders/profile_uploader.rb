@@ -2,15 +2,22 @@
 
 class ProfileUploader < CarrierWave::Uploader::Base
 
-  # Include RMagick or MiniMagick support:
-  # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  include CarrierWave::RMagick
+  process :convert => 'png'
+  #process :watermark
 
-  # Choose what kind of storage to use for this uploader:
   if Rails.env.production?
     storage :fog
   else
     storage :file
+  end
+
+  version :thumb do
+    process :resize_to_limit => [242,200]
+  end
+
+  version :index do
+    process :resize_to_fit => [460, 560]
   end
 
   # Override the directory where uploaded files will be stored.
