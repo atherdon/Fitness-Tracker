@@ -53,7 +53,8 @@ CREATE TABLE pictures (
     attachment character varying,
     user_id integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    bora character varying
 );
 
 
@@ -299,4 +300,6 @@ INSERT INTO schema_migrations (version) VALUES ('20151114150501');
 INSERT INTO schema_migrations (version) VALUES ('20151121002411');
 
 INSERT INTO schema_migrations (version) VALUES ('20151204231927');
+
+INSERT INTO schema_migrations (version) VALUES ('20151215010844');
 

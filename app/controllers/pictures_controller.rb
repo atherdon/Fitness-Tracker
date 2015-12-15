@@ -1,5 +1,6 @@
 class PicturesController < ApplicationController
 	before_action :check_bora, only: [:create, :update]
+	before_action :check_profile_exists, only: [:create]
 
 	def new
 		@picture = Picture.new
@@ -9,10 +10,10 @@ class PicturesController < ApplicationController
 		@user = current_user
 		@picture = @user.pictures.build(picture_params)
 		if @picture.save
-			if whitelisted[:bora] = "before"
-				@user.before = @picture.id
-			elsif whitelisted[:bora] = "after"
-				@user.after = @picture.id
+			if params[:bora] = "before"
+				@user.update_attribute(:before, @picture.id)
+			elsif params[:bora] = "after"
+				@user.update_attribute(:after, @picture.id)
 			end
   	  render json: { message: "success" }, :status => 200
   	else
@@ -31,7 +32,17 @@ class PicturesController < ApplicationController
 		end
 	end
 
+	def check_profile_exists
+		if current_user.before.present? && params[:bora] = "before"
+			flash.now[:alert] = "Before pic already exists."
+			return
+		elsif current_user.after.present? && params[:bora] = "after"
+			flash.now[:alert] = "After pic already exists."
+			return
+		end
+	end
+
 	def picture_params
-		params.require(:picture).permit(:attachment, :caption)
+		params.require(:picture).permit(:attachment, :caption, :bora)
 	end	
 end
