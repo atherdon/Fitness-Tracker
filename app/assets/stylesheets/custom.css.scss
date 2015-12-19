@@ -85,9 +85,11 @@ textarea {
   min-width: 460px;
   display: table-cell!important;
   vertical-align:bottom;
-  padding-bottom: 0px;
+  padding: 0px 0px 0px 0px;
 
 }
+
+
 
 
 
@@ -105,12 +107,14 @@ textarea {
     vertical-align: middle;
 }
 
+.thumbnails { border:0; }
+
 
 
 .upload {
   vertical-align: bottom;
   padding-bottom: 0px;
-
+  padding-top: 0px;
 }
 
 .glyphicon-plus {

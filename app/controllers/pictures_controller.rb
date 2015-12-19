@@ -6,21 +6,30 @@ class PicturesController < ApplicationController
 		@picture = Picture.new
 	end
 
-	def create
+	def before_picture
 		@user = current_user
 		@picture = @user.pictures.build(picture_params)
 		if @picture.save
-			if params[:bora] = "before"
-				@user.update_attribute(:before, @picture.id)
-			elsif params[:bora] = "after"
-				@user.update_attribute(:after, @picture.id)
-			end
+			@user.update_attribute(:before, @picture.id)
   	  render json: { message: "success" }, :status => 200
   	else
   	  #  you need to send an error header, otherwise Dropzone
           #  will not interpret the response as an error:
   	  render json: { error: @picture.errors.full_messages.join(',')}, :status => 400
   	end  
+	end
+
+	def after_picture
+		@user = current_user
+		@picture = @user.pictures.build(picture_params)	
+		if @picture.save
+			@user.update_attribute(:after, @picture.id)
+  	  render json: { message: "success" }, :status => 200
+  	else
+  	  #  you need to send an error header, otherwise Dropzone
+          #  will not interpret the response as an error:
+  	  render json: { error: @picture.errors.full_messages.join(',')}, :status => 400
+  	end 
 	end
 
 	private
@@ -34,11 +43,9 @@ class PicturesController < ApplicationController
 
 	def check_profile_exists
 		if current_user.before.present? && params[:bora] = "before"
-			flash.now[:alert] = "Before pic already exists."
-			return
+			flash.now[:alert] = "Before pic already exists." and return
 		elsif current_user.after.present? && params[:bora] = "after"
-			flash.now[:alert] = "After pic already exists."
-			return
+			flash.now[:alert] = "After pic already exists." and return
 		end
 	end
 
