@@ -54,7 +54,8 @@ CREATE TABLE pictures (
     user_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    bora character varying
+    bora character varying,
+    workout_id integer
 );
 
 
@@ -107,7 +108,8 @@ CREATE TABLE users (
     username character varying,
     preferences hstore,
     before integer,
-    after integer
+    after integer,
+    stats hstore
 );
 
 
@@ -222,6 +224,13 @@ CREATE INDEX index_pictures_on_user_id_and_attachment ON pictures USING btree (u
 
 
 --
+-- Name: index_pictures_on_workout_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_pictures_on_workout_id ON pictures USING btree (workout_id);
+
+
+--
 -- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -243,6 +252,13 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (re
 
 
 --
+-- Name: index_users_on_stats; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_stats ON users USING gist (stats);
+
+
+--
 -- Name: index_workouts_on_exercises; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -261,6 +277,14 @@ CREATE INDEX index_workouts_on_user_id ON workouts USING btree (user_id);
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+
+
+--
+-- Name: fk_rails_0f1d9d11d1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY pictures
+    ADD CONSTRAINT fk_rails_0f1d9d11d1 FOREIGN KEY (workout_id) REFERENCES workouts(id);
 
 
 --
@@ -302,4 +326,10 @@ INSERT INTO schema_migrations (version) VALUES ('20151121002411');
 INSERT INTO schema_migrations (version) VALUES ('20151204231927');
 
 INSERT INTO schema_migrations (version) VALUES ('20151215010844');
+
+INSERT INTO schema_migrations (version) VALUES ('20151220171704');
+
+INSERT INTO schema_migrations (version) VALUES ('20151220172443');
+
+INSERT INTO schema_migrations (version) VALUES ('20151220173442');
 

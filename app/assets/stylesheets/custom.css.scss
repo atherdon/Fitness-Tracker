@@ -125,7 +125,29 @@ textarea {
   font-size: 1.6em;
 }
 
+.glyphicon-remove-circle {
+  font-size: 1.6em;
+  opacity:0.3;
+}
 
+.red {
+  color: red;
+}
+
+.image {
+  position: relative;
+  div:hover {
+    .glyphicon-remove-circle {
+    opacity:0.9;
+    }
+  }
+}
+
+.delete-pic {
+  position:absolute;
+  top:10px;
+  right:10px;
+}
 
 
 
