@@ -12,14 +12,16 @@ class PicturesController < ApplicationController
 			flash.now[:alert] = "Before pic already exists." and return
 		end
 		@picture = @user.pictures.build(picture_params)
-		if @picture.save
-			@user.update_attribute(:before, @picture.id)
-  	  render json: { message: "success" }, :status => 200
-  	else
-  	  #  you need to send an error header, otherwise Dropzone
-          #  will not interpret the response as an error:
-  	  render json: { error: @picture.errors.full_messages.join(',')}, :status => 400
-  	end  
+		respond_to do |format|
+			if @picture.save
+				@user.update_attribute(:before, @picture.id)
+	  	  render json: { message: "success" }, :status => 200
+	  	else
+	  	  #  you need to send an error header, otherwise Dropzone
+	          #  will not interpret the response as an error:
+	  	  render json: { error: @picture.errors.full_messages.join(',')}, :status => 400
+	  	end
+	  end  
 	end
 
 	def delete_before_pic
