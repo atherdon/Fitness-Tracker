@@ -48,7 +48,7 @@ gem "rmagick", :require => 'rmagick'
 
 gem 'rails_12factor', group: :production
 
-
+gem 'remotipart', '~> 1.2'
 
 
 

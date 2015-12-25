@@ -15,11 +15,11 @@ class PicturesController < ApplicationController
 		respond_to do |format|
 			if @picture.save
 				@user.update_attribute(:before, @picture.id)
-	  	  render json: { message: "success" }, :status => 200
+				format.js { render file: "/app/views/users/before_picture.js.erb" }
 	  	else
 	  	  #  you need to send an error header, otherwise Dropzone
 	          #  will not interpret the response as an error:
-	  	  render json: { error: @picture.errors.full_messages.join(',')}, :status => 400
+	  	  format.html { render 'show' }
 	  	end
 	  end  
 	end
@@ -33,7 +33,7 @@ class PicturesController < ApplicationController
 				@user.update_attribute(:before, nil)
 				format.js { render file: "/app/views/users/delete_before_pic.js.erb" }
 			else
-				format.html { render action: 'show' }
+				format.html { render 'show' }
 			end
 		end
 	end
@@ -44,14 +44,16 @@ class PicturesController < ApplicationController
 			flash.now[:alert] = "After pic already exists." and return
 		end
 		@picture = @user.pictures.build(picture_params)	
-		if @picture.save
-			@user.update_attribute(:after, @picture.id)
-  	  render json: { message: "success" }, :status => 200
-  	else
-  	  #  you need to send an error header, otherwise Dropzone
-          #  will not interpret the response as an error:
-  	  render json: { error: @picture.errors.full_messages.join(',')}, :status => 400
-  	end 	
+		respond_to do |format|
+			if @picture.save
+				@user.update_attribute(:after, @picture.id)
+	  	  format.js { render file: "/app/views/users/after_picture.js.erb" }
+	  	else
+	  	  #  you need to send an error header, otherwise Dropzone
+	          #  will not interpret the response as an error:
+	  	  format.html { render 'show' }
+	  	end 
+  	end	
 	end
 
 	def delete_after_pic
@@ -63,7 +65,7 @@ class PicturesController < ApplicationController
 				@user.update_attribute(:after, nil)
 				format.js { render file: "/app/views/users/delete_after_pic.js.erb" }
 			else
-				format.html { render action: 'show' }
+				format.html { render 'show' }
 			end
 		end
 	end

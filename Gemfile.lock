@@ -200,6 +200,7 @@ GEM
       rake
     rdoc (4.2.0)
     ref (2.0.0)
+    remotipart (1.2.1)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
     rmagick (2.15.4)
@@ -280,6 +281,7 @@ DEPENDENCIES
   rails (= 4.2.0)
   rails_12factor
   randumb
+  remotipart (~> 1.2)
   rmagick
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
+//= require jquery.remotipart
 //= require jquery-fileupload
 //= require bootstrap
 //= require turbolinks
