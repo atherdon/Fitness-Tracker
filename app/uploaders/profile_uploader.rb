@@ -3,7 +3,7 @@
 class ProfileUploader < CarrierWave::Uploader::Base
 
   include CarrierWave::RMagick
-  process :convert => 'png'
+  
   #process :watermark
 
   if Rails.env.production?
@@ -13,11 +13,13 @@ class ProfileUploader < CarrierWave::Uploader::Base
   end
 
   version :thumb do
-    process :resize_to_limit => [242,200]
+    process convert: 'png'
+    process :resize_to_limit => [242, 0]
   end
 
   version :index do
-    process :resize_to_fit => [460, 560]
+    process convert: 'png'
+    process :resize_to_limit => [460, 700]
   end
 
   # Override the directory where uploaded files will be stored.

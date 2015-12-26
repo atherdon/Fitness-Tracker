@@ -4,17 +4,17 @@
 		<div class="">
 
 			<% if current_user %>
-			<div class="thumbnail">
+			
 				
 				<%= render 'before_profile_picture' %>
         
-			</div>
+
 			
-			<div class="thumbnail">
+			
 
 				<%= render 'after_profile_picture' %>
 				
-			</div>
+
 
 			<% else  %>
 				<% if @user.before.present? %>
@@ -49,15 +49,15 @@
 
 <script type="text/javascript">
 
-     $(".before-upload input:file").change( function (){
-     	 
+		 $(document).on("change", ".before-upload input:file", function() {
+
        var fileName = $(this).val().replace(/.*(\/|\\)/, '');
        $(".filename-before").html(fileName);
        $("#beforeinput").attr('class', 'glyphicon glyphicon-ok');
        
      });
 
-     $(".after-upload input:file").change( function (){
+		 $(document).on("change", ".after-upload input:file", function() {
      	 
        var fileName = $(this).val().replace(/.*(\/|\\)/, '');
        $(".filename-after").html(fileName);

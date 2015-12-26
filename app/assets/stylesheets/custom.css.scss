@@ -58,6 +58,10 @@ textarea {
   background-color: black;
 }
 
+.transparent {
+  background: rgba(54, 25, 25, 0); 
+}
+
 .navbar-brand
 {
     position: absolute;
@@ -80,13 +84,22 @@ textarea {
 
 
 .thumbnail {
-  height: 560px;
-  min-height: 560px;
+  height: 700px;
+  min-height: 700px;
   min-width: 460px;
   display: table-cell!important;
-  vertical-align:bottom;
+  vertical-align: bottom;
   padding: 0px 0px 0px 0px;
 
+}
+
+.thumbnail-profile {
+  height: 700px;
+  min-height: 700px;
+  min-width: 460px;
+  display: table-cell!important;
+  vertical-align: middle;
+  padding: 0px 0px 0px 0px;
 }
 
 
