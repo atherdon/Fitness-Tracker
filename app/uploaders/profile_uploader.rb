@@ -19,7 +19,7 @@ class ProfileUploader < CarrierWave::Uploader::Base
 
   version :index do
     process convert: 'png'
-    process :resize_to_limit => [460, 700]
+    process :resize_to_limit => [460, 600]
   end
 
   # Override the directory where uploaded files will be stored.
