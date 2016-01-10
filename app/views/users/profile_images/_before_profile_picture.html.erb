@@ -1,13 +1,13 @@
 <% if @user.before? %>
-	<div class="thumbnail-profile dark-background">
+	<div class="thumbnail-profile dark-background pic-right">
 <% else %>
-<div class="thumbnail">
+<div class="thumbnail row-centered">
 <% end %> 
 	<div class="before-upload">
 
 		<% if @user.before? %>
 			<div class="image dark-background">
-			<div class="delete-pic">
+			<div class="delete-pic pic-right">
 				
 				<%= form_for @picture, url: delete_before_pic_path, method: :delete, :authenticity_token => true, html: { multipart: true }, remote: true do |f| %>
 					<%= button_tag(type: "submit", class: "btn transparent", name: "commit", value: "conceal") do %>

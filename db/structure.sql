@@ -109,7 +109,8 @@ CREATE TABLE users (
     preferences hstore,
     before integer,
     after integer,
-    stats hstore
+    stats_before hstore,
+    stats_after hstore
 );
 
 
@@ -252,10 +253,17 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (re
 
 
 --
--- Name: index_users_on_stats; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_stats_after; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_users_on_stats ON users USING gist (stats);
+CREATE INDEX index_users_on_stats_after ON users USING gist (stats_after);
+
+
+--
+-- Name: index_users_on_stats_before; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_stats_before ON users USING gist (stats_before);
 
 
 --
@@ -332,4 +340,8 @@ INSERT INTO schema_migrations (version) VALUES ('20151220171704');
 INSERT INTO schema_migrations (version) VALUES ('20151220172443');
 
 INSERT INTO schema_migrations (version) VALUES ('20151220173442');
+
+INSERT INTO schema_migrations (version) VALUES ('20151231030328');
+
+INSERT INTO schema_migrations (version) VALUES ('20151231030420');
 

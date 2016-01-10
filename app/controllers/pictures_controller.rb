@@ -15,7 +15,7 @@ class PicturesController < ApplicationController
 		respond_to do |format|
 			if @picture.save
 				@user.update_attribute(:before, @picture.id)
-				format.js { render file: "/app/views/users/before_picture.js.erb" }
+				format.js { render file: "/app/views/users/profile_images/before_picture.js.erb" }
 	  	else
 	  	  #  you need to send an error header, otherwise Dropzone
 	          #  will not interpret the response as an error:
@@ -31,7 +31,7 @@ class PicturesController < ApplicationController
 		respond_to do |format|
 			if @picture.delete
 				@user.update_attribute(:before, nil)
-				format.js { render file: "/app/views/users/delete_before_pic.js.erb" }
+				format.js { render file: "/app/views/users/profile_images/delete_before_pic.js.erb" }
 			else
 				format.html { render 'show' }
 			end
@@ -47,7 +47,7 @@ class PicturesController < ApplicationController
 		respond_to do |format|
 			if @picture.save
 				@user.update_attribute(:after, @picture.id)
-	  	  format.js { render file: "/app/views/users/after_picture.js.erb" }
+	  	  format.js { render file: "/app/views/users/profile_images/after_picture.js.erb" }
 	  	else
 	  	  #  you need to send an error header, otherwise Dropzone
 	          #  will not interpret the response as an error:
@@ -63,7 +63,7 @@ class PicturesController < ApplicationController
 		respond_to do |format|
 			if @picture.delete
 				@user.update_attribute(:after, nil)
-				format.js { render file: "/app/views/users/delete_after_pic.js.erb" }
+				format.js { render file: "/app/views/users/profile_images/delete_after_pic.js.erb" }
 			else
 				format.html { render 'show' }
 			end
