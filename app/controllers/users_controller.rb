@@ -6,6 +6,8 @@ class UsersController < ApplicationController
   def show
   	@user = User.find_by_username(params[:username])
     @picture = Picture.new
+    gon.before_stats = @user.stats_before
+    gon.after_stats = @user.stats_after
   end
 
   def before_picture
@@ -33,6 +35,79 @@ class UsersController < ApplicationController
   		end
   	end
   end
+
+  def before_stats
+    @user = current_user
+    @exercise = params[:exercise]
+    @weight = params[:weight]
+    @h = @exercise.zip(@weight)
+    @stats = {}
+
+    @h.each do |exercise, weight|
+      @stats["#{exercise}"] = "#{weight}"
+    end
+    if @user.update_attribute(:stats_before, @stats)
+      respond_to do |format|
+        format.js { render file: "/app/views/users/before_after_stats/before_stats.js.erb" }
+      end
+    else
+      format.html { redirect_to current_user}
+    end
+  end
+
+  def after_stats
+    @user = current_user
+    @exercise = params[:exercise]
+    @weight = params[:weight]
+    @h = @exercise.zip(@weight)
+    @stats = {}
+
+    @h.each do |exercise, weight|
+      @stats["#{exercise}"] = "#{weight}"
+    end
+    if @user.update_attribute(:stats_after, @stats)
+      respond_to do |format|
+        format.js { render file: "/app/views/users/before_after_stats/after_stats.js.erb" }
+      end
+    else
+      format.html { redirect_to current_user}
+    end
+  end
+
+  #not in use
+  def update_before_stats
+    @user = current_user
+    @exercise = params[:exercise]
+    @weight = params[:weight]
+    @h = @exercise.zip(@weight)
+    @stats = {}
+
+    @h.each do |exercise, weight|
+      if @user.stats_before["#{exercise}"].present? && @user.stats_before[exercise] != weight
+        @stats["#{exercise}"] = "#{weight}"
+      else
+        @stats["#{exercise}"] = "#{weight}"
+      end
+    end
+
+    if @user.update_attribute(:stats_before, @stats)
+      respond_to do |format|
+        format.html { redirect_to current_user}
+        format.js
+      end
+    end
+  end
+
+  def update_after_stats
+
+  end
+
+
+
+
+
+
+
 
   private
 

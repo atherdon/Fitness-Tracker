@@ -1,1 +1,72 @@
-_before_stats.html.erb
+<% if @user.stats_before %>
+	<% if current_user %>
+		<div class="before-stats edit-stats edit-before-stats">
+		<span class="glyphicon glyphicon glyphicon-edit edit-before-stats-button" ></span>
+	<% end %>
+
+	<% @user.stats_before.each do |key,val| %>
+		<%= key %>: <%= val %><br>
+	<% end %>
+
+	<% if current_user %>
+		</div>
+
+		<div style="display:none;" id="edit-before-partial">
+		<div class="well">
+			<%= form_for @user, url: add_before_stats_path, method: :post, :authenticity_token => true, html: { multipart: true }, remote: true do |f| %>
+			<span class="glyphicon glyphicon-remove" id="cancel-edit-before-stats"></span>
+
+			<div class="input_fields_wrap_edit_before">
+	    <button class="add_field_button_edit_before btn btn-info">Add More Fields</button><br><br>
+
+	    <% @user.stats_before.each do |e, w| %>
+	    	<input type="text" style="width: 190px" name="exercise[]" value="<%= e %>"/>
+	    	<input type="text" style="width: 80px" name="weight[]" value="<%= w %>"/>
+	    <% end %>
+
+			</div>
+
+			<br>
+			
+			<%= f.button "Update stats", class: "btn btn-info", name: "commit", value: "conceal" %>
+			<% end %>
+			</div>
+		</div>
+
+
+	<% end %>
+<% else %>
+	<% if current_user %>
+		<div class="well before-stats">
+			<div class="add-before-stats">
+				<span class="glyphicon glyphicon-plus"></span>
+				<h2>Add stats</h2>
+			</div>
+
+			<div style="display:none;" id="before-partial">
+				<%= form_for @user, url: add_before_stats_path, method: :post, :authenticity_token => true, html: { multipart: true }, remote: true do |f| %>
+				<span class="glyphicon glyphicon-remove" id="cancel-before-stats"></span>
+
+				<div class="input_fields_wrap">
+		    <button class="add_field_button btn btn-info">Add More Fields</button><br><br>
+
+		    <input type="text" style="width: 190px" name="exercise[]" value="Bench"/>
+		    <input type="text" style="width: 80px" name="weight[]" value="100"/>
+
+		    <input type="text" style="width: 190px" name="exercise[]" value="Squat"/>
+		    <input type="text" style="width: 80px" name="weight[]" value="200"/>
+
+		    <input type="text" style="width: 190px" name="exercise[]" value="Deadlift"/>
+		    <input type="text" style="width: 80px" name="weight[]" value="300"/>
+
+				</div>
+
+				<br>
+  			
+				<%= f.button "Add stats", class: "btn btn-info", name: "commit", value: "conceal" %>
+				<% end %>
+			</div>
+
+		</div>
+	<% end %>
+<% end %>

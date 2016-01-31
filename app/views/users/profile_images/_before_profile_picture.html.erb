@@ -1,38 +1,36 @@
 <% if @user.before? %>
-	<div class="thumbnail-profile dark-background pic-right">
+	<div class="before-upload thumbnail-profile dark-background pic-right">
 <% else %>
-<div class="thumbnail row-centered">
+<div class="before-upload thumbnail row-centered">
 <% end %> 
-	<div class="before-upload">
 
-		<% if @user.before? %>
-			<div class="image dark-background">
-			<div class="delete-pic pic-right">
-				
-				<%= form_for @picture, url: delete_before_pic_path, method: :delete, :authenticity_token => true, html: { multipart: true }, remote: true do |f| %>
-					<%= button_tag(type: "submit", class: "btn transparent", name: "commit", value: "conceal") do %>
-	 			    <span class="glyphicon glyphicon-remove-circle red" aria-hidden="true"></span>
-					<% end %> 
-				<% end %>
+	<% if @user.before? %>
+		<div class="image dark-background">
+		<div class="delete-pic pic-right">
+			
+			<%= form_for @picture, url: delete_before_pic_path, method: :delete, :authenticity_token => true, html: { multipart: true }, remote: true do |f| %>
+				<%= button_tag(type: "submit", class: "btn transparent", name: "commit", value: "conceal") do %>
+ 			    <span class="glyphicon glyphicon-remove-circle red" aria-hidden="true"></span>
+				<% end %> 
+			<% end %>
 
-			</div>
-			<%= image_tag Picture.where(id: current_user.before).first.attachment.url(:index) %>
-			</div>
-		<% else %>
-			<div class="before-up">
-				<%= form_for @picture, url: before_picture_path, method: :post, :authenticity_token => true, html: { multipart: true }, remote: true do |f| %>
+		</div>
+		<%= image_tag Picture.where(id: current_user.before).first.attachment.url(:index) %>
+		</div>
+	<% else %>
+		<div class="before-up">
+			<%= form_for @picture, url: before_picture_path, method: :post, :authenticity_token => true, html: { multipart: true }, remote: true do |f| %>
 
-			    <label for="inputFileBefore", class="glyphicon glyphicon-plus", id= "beforeinput" %></label>
-			    <%= f.file_field :attachment, style:"display: none", id:"inputFileBefore" %>
-			    <%= f.hidden_field 'bora', value: "before" %>
-			    <br>
-			    <span class="filename-before"></span>
-			    <br><br>
-			    <%= f.submit "Upload", class:"btn btn-info" %>
-			    </span>
-			   <% end %>
-				<%= link_to image_tag("zyzz.jpg"), root_path %>	
-			</div>
-		<% end %>
-	</div>
+		    <label for="inputFileBefore", class="glyphicon glyphicon-plus", id= "beforeinput" %></label>
+		    <%= f.file_field :attachment, style:"display: none", id:"inputFileBefore" %>
+		    <%= f.hidden_field 'bora', value: "before" %>
+		    <br>
+		    <span class="filename-before"></span>
+		    <br><br>
+		    <%= f.submit "Upload", class:"btn btn-info" %>
+		    </span>
+		   <% end %>
+			<%= link_to image_tag("zyzz.jpg"), root_path %>	
+		</div>
+	<% end %>
 </div>

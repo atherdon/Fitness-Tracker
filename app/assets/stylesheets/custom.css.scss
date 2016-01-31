@@ -181,10 +181,57 @@ textarea {
 }
 
 
+#cancel-after-stats {
+  position:absolute;
+  top:10px;
+  right:30px;
+}
 
+#cancel-before-stats {
+  position:absolute;
+  top:10px;
+  right:30px;
+}
 
+#cancel-edit-before-stats {
+  position:absolute;
+  top:10px;
+  right:30px;
+}
 
+#cancel-edit-after-stats {
+  position:absolute;
+  top:10px;
+  right:30px;
+}
 
+.edit-before-stats-button {
+  position:absolute;
+  top:5px;
+  right:20px;
+  opacity:0.1;
+}
+
+.edit-after-stats-button {
+  position:absolute;
+  top:5px;
+  right:20px;
+  opacity:0.1;
+}
+
+.edit-before-stats:hover {
+    background-color:   #fff2f2;
+    .edit-before-stats-button {
+    opacity:1;
+    }
+}
+
+.edit-after-stats:hover {
+    background-color:   #fff2f2;
+    .edit-after-stats-button {
+    opacity:1;
+    }
+}
 
 
 
@@ -214,7 +261,6 @@ margin-right: -15px !important;
 .navbar-right {
 float: right!important;
 }
-
 
 
 

@@ -12,6 +12,11 @@ Rails.application.routes.draw do
   delete '/:username/delete_before_pic' => 'pictures#delete_before_pic', as: :delete_before_pic
   delete '/:username/delete_after_pic' => 'pictures#delete_after_pic', as: :delete_after_pic
   
+  post '/:username/after_stats' => 'users#after_stats', as: :add_after_stats
+  post '/:username/before_stats' => 'users#before_stats', as: :add_before_stats
+
+  patch '/:username/update_after_stats' => 'users#update_after_stats', as: :update_after_stats
+  patch '/:username/update_before_stats' => 'users#update_before_stats', as: :update_before_stats
 
   root 'users#index'
 
