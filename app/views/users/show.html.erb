@@ -1,21 +1,63 @@
 
 <%= render 'users/profile_images/transformation' %>
 
+
 <div class="container light-background">
+
 	<div class="col-md-6 col-md-offset-3">
-	<h2>
-	<%= @user.username %>
-
-	<div class="vertical-line" />
-	<span class="margin glyphicon glyphicon-menu-up">
-
-	
-	</h2>
+		<h2>
+		<%= @user.username %>&nbsp;
+		
+		<% if not current_user %>
+		<span class="btn btn-default">Follow</span>
+		<% else %>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<% end %>
+		
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;
+		<span class="glyphicon glyphicon-menu-up margin"><%= @user.workouts.count %></span>
+		&nbsp;
+		<span class="glyphicon glyphicon-equalizer margin"><%= @user.workouts.count %></span>
+		</h2>
 	</div>
-
 	<br><br><br><br>
 
 	<hr>
 	<%= render 'users/before_after_stats/stats' %>
 	<hr>
+
 </div>
+
+<div class="container light-background">
+	<%= render 'users/workouts/feed' %>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

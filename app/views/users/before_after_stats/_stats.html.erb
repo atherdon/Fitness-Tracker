@@ -14,6 +14,13 @@
 
 <!-- Used in both partials above-->
 <script>
+
+jQuery(document).on("ready page:change", function() { toggleAutoComplete() })
+
+function toggleAutoComplete(){
+
+
+
 $('.add-before-stats').click(function(){
     $('#before-partial').show();
     $('.add-before-stats').hide();
@@ -35,6 +42,10 @@ $('.add-before-stats').click(function(){
     $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
         e.preventDefault(); $(this).parent('div').remove(); x--;
     })
+});
+
+$('.submit-stats').click(function(){
+    $('#before-stats').remove();
 });
 
 $('.add-after-stats').click(function(){
@@ -69,6 +80,7 @@ $('#cancel-after-stats').click(function(){
     $('#after-partial').hide();
     $('.add-after-stats').show();
 });
+
 
 $('.edit-before-stats-button').click(function(){
 		$('#edit-before-partial').show();
@@ -123,6 +135,21 @@ $('#cancel-edit-after-stats').click(function(){
     $('#edit-after-partial').hide();
     $('.edit-after-stats').show();
 });
+
+
+
+
+
+
+
+
+ }
+
+
+
+
+
+
 
 </script>
 

@@ -13,13 +13,13 @@
 
 		<div style="display:none;" id="edit-after-partial">
 		<div class="well">
-			<%= form_for @user, url: add_before_stats_path, method: :post, :authenticity_token => true, html: { multipart: true }, remote: true do |f| %>
+			<%= form_for @user, url: add_after_stats_path, method: :post, :authenticity_token => true, html: { multipart: true }, remote: true do |f| %>
 			<span class="glyphicon glyphicon-remove" id="cancel-edit-after-stats"></span>
 
 			<div class="input_fields_wrap_edit_after">
 	    <button class="add_field_button_edit_after btn btn-info">Add More Fields</button><br><br>
 
-	    <% @user.stats_before.each do |e, w| %>
+	    <% @user.stats_after.each do |e, w| %>
 	    	<input type="text" style="width: 190px" name="exercise[]" value="<%= e %>"/>
 	    	<input type="text" style="width: 80px" name="weight[]" value="<%= w %>"/>
 	    <% end %>

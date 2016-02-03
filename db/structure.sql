@@ -55,7 +55,8 @@ CREATE TABLE pictures (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     bora character varying,
-    workout_id integer
+    workout_id integer,
+    flagged character varying
 );
 
 
@@ -142,7 +143,8 @@ CREATE TABLE workouts (
     user_id integer,
     exercises hstore,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    volume character varying
 );
 
 
@@ -344,4 +346,8 @@ INSERT INTO schema_migrations (version) VALUES ('20151220173442');
 INSERT INTO schema_migrations (version) VALUES ('20151231030328');
 
 INSERT INTO schema_migrations (version) VALUES ('20151231030420');
+
+INSERT INTO schema_migrations (version) VALUES ('20160201143953');
+
+INSERT INTO schema_migrations (version) VALUES ('20160201171019');
 
