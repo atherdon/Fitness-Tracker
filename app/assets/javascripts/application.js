@@ -11,16 +11,92 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.cookie
+//= require jstz
+//= require browser_timezone_rails/set_time_zone
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery.remotipart
 //= require jquery-fileupload
 //= require bootstrap
 //= require turbolinks
+//= require twitter/typeahead
+//= require twitter/typeahead/bloodhound
+//= require moment
+//= require bootstrap-datetimepicker
+//= require fotorama
 //= require_tree .
 
-$(document).on('page:update', function () {
 
+
+$(document).on("change", ".workout-pics input:file", function() {
+  var ext = this.value.match(/\.(.+)$/)[1];
+    switch (ext) {
+        case 'jpg':
+        case 'jpeg':
+        case 'png':
+        case 'gif':
+            $('#workout-pics').attr('disabled', false);
+            break;
+        default:
+            alert('This is not an allowed file type.');
+            this.value = '';
+            return false;
+    }
+
+  $("#workout-pics").attr('class', 'glyphicon glyphicon-ok');
+  $(".filename-after").empty();
+  for (var i = 0; i < this.files.length; i++)
+    {
+        $(".filename-after").append(this.files[i].name + "<br>");
+    }
+  if ($( "#cancel-pics" ).length ) {
+
+  } else {
+
+  $(".filename-after").append('<br><button type="button" class="btn btn-info btn-sm" aria-label="Left Align" id="cancel-pics">Cancel</button><br>');
+  
+  }
+
+  
+
+});
+
+$(document).on("click", "#cancel-pics", function() {
+  $('#cancel-pics').remove();
+    $(".filename-after").empty();
+    $('#workout-pics').val('');
+    $("#workout-pics").attr('class', 'glyphicon glyphicon-plus');
+});
+
+
+$(document).on('page:update ready', function () {
+
+$('.fotorama').fotorama();
+
+
+//BEFORE AND AFTER PICTURES
+
+$(document).on("change", ".before-upload input:file", function() {
+
+	var fileName = $(this).val().replace(/.*(\/|\\)/, '');
+	$(".filename-before").html(fileName);
+	$("#beforeinput").attr('class', 'glyphicon glyphicon-ok');
+ 
+});
+
+$(document).on("change", ".after-upload input:file", function() {
+	 
+	var fileName = $(this).val().replace(/.*(\/|\\)/, '');
+	$(".filename-after").html(fileName);
+	$("#afterinput").attr('class', 'glyphicon glyphicon-ok');
+
+});
+
+
+
+
+// STATS
 $('.add-before-stats').click(function() {
   var add_button, max_fields, wrapper, x;
   $('#before-partial').show();
@@ -134,6 +210,87 @@ $('#cancel-edit-after-stats').click(function() {
 });
 
 
+
+//WORKOUT
+
+$('.add-workout').click(function() {
+  var add_button, max_fields, wrapper, x;
+  $('#workout-form').show();
+  $('.add-workout').hide();
+
+  max_fields = 10;
+  wrapper = $('.input_fields_wrap_add_workout');
+  add_button = $('.add_workout_field_button');
+  x = 1;
+  $(add_button).click(function(e) {
+    e.preventDefault();
+    if (x < max_fields) {
+      x++;
+      $(wrapper).append('<input type="text" style="width: 306px" name="exercise[]" placeholder="Exercise"/><br>' + 
+		  '<span class="glyphicon glyphicon-plus btn btn-default btn-sm add-set"> Add set</span>'+
+		  '<span class="glyphicon glyphicon-list btn btn-default btn-sm duplicate-set"> Duplicate set</span>'+
+		  '<span class="glyphicon glyphicon-minus btn btn-default btn-sm remove-set"> Remove set</span><br>'+
+		  '<input type="text" style="width: 80px" name="weight[]" placeholder="Weight"/>'+
+		  '<input type="text" style="width: 80px" name="reps[]" placeholder="Reps"/><br><br>');
+    }
+  });
+  $(wrapper).on('click', '.remove_field', function(e) {
+    e.preventDefault();
+    $(this).parent('div').remove();
+    x--;
+  });
+});
+
+$('#cancel-add-workout').click(function() {
+  $('#workout-form').hide();
+  $('.add-workout').show();
+});
+
+$('#edit-workout').click(function() {
+  var add_button, max_fields, wrapper, x;
+
+  $(this).closest('.workouts').hide();
+
+  $(this).closest('.workouts').next().children("#edit-workout-form").show();
+
+
+  
+ 
+});
+
+$('#cancel-edit-workout').click(function() {
+  $('#edit-workout-form').hide();
+  $(this).closest('.workouts').show();
+});
+
+
+
+
+
+// datepicker workout
+
+
+var d = new Date();
+
+var month = d.getMonth()+1;
+var day = d.getDate();
+
+var output = d.getFullYear() + '/' +
+(month<10 ? '0' : '') + month + '/' +
+(day<10 ? '0' : '') + day;
+
+
+$('#datetimepicker1').datetimepicker({
+  defaultDate: output,
+  format: 'MM/DD/YYYY'
+});
+
+
+
+// flash
+
+$('#flash').delay(200).fadeIn('normal', function() {
+      $(this).delay(2500).fadeOut();
 });
 
 
@@ -142,6 +299,112 @@ $('#cancel-edit-after-stats').click(function() {
 
 
 
+// END
+
+});
+
+//--- TYPEAHEAD WORKOUT FUNCTION ---
+
+$(document).ready(function(){
+
+var types = new Bloodhound({
+  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+  queryTokenizer: Bloodhound.tokenizers.whitespace,
+  remote: {
+    url: '/typeahead/%QUERY',
+    wildcard: '%QUERY'
+  }
+});
+
+
+$('.typeahead').typeahead(null, {
+  display: 'name',
+  source: types,
+  minLength: 1,
+  highlight: true
+});
+
+// this is the event that is fired when a user clicks on a suggestion
+	$('.typeahead').bind('typeahead:selected', function(event, datum, name) {
+
+
+
+		var name = datum.name
+    var x = 0;
+    nameDisplay = name
+		name = name.replace(/\s+/g, '-')
+
+    
+
+		wrapper = $('.weight_fields_wrap');
+
+    if ( $('.'+name)[0]) {
+      return false;
+    }
+ 
+    
+
+		$(wrapper).append('<div class="'+name+'">'+
+				'&nbsp;&nbsp;&nbsp;&thinsp;&thinsp;&thinsp;&thinsp;'+
+				'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input disabled="disabled" class="exercise-name" type="text" style="width: 258px" name="exercise[]" value="'+nameDisplay+'"/>'+
+			  '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-trash exercise-delete" id="'+name+'-delete" aria-hidden="true"></span>'+
+			  '<br>'+
+			  '<div class="set-buttons"</div>'+
+  			  '<button type="button" class="btn btn-default btn-sm add-set" aria-label="Left Align" id="'+name+'-add-set"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp; Add Set</button>'+
+  			  '<button type="button" class="btn btn-default btn-sm remove-set" aria-label="Left Align" id="'+name+'-remove-set"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>&nbsp; Remove Set</button>'+
+  			  '<button type="button" class="btn btn-default btn-sm duplicate-set" aria-label="Left Align" id="'+name+'-duplicate-set"><span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span>&nbsp; Duplicate Set</button>'+
+			  '</div>'+
+			  '<div class="'+name+'-set-wrap">'+
+			  '</div><hr>'+
+			  '</div>');
+
+		$(document).on('click', '#'+name+'-add-set', function() {
+      x++;
+	    wrapper = $('.'+name+'-set-wrap')
+	    $(wrapper).append(
+			  '<input type="text" style="width: 56px" name="exercises['+name+']['+x+'][]" placeholder="Weight"/>'+
+        ' x '+
+        '<input type="text" style="width: 56px" name="exercises['+name+']['+x+'][]" placeholder="Reps"/><br>');
+		});
+
+		$(document).on('click', '#'+name+'-remove-set', function() {
+
+	    wrapper = $('.'+name+'-set-wrap')
+
+		});
+
+		$(document).on('click', '#'+name+'-duplicate-set', function() {
+
+	    wrapper = $('.'+name+'-set-wrap')
+	    $(wrapper).append(
+	    	'<input type="text" style="width: 56px" name="'+name+'" placeholder="Sets" id="sets"/>'+
+			  '<input type="text" style="width: 56px" name="exercise[]" placeholder="Reps"/>');
+		});
+
+		$(document).on('click', '#'+name+'-delete', function() {
+      x = 0;
+      $('.'+name+'-set-wrap').remove();
+	    $('.'+name).remove();
+
+		});
+
+	});
+
+
+
+		
+
+
+
+
+
+
+
+ //END
+
+
+
+});
 
 
 

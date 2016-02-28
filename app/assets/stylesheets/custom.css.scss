@@ -37,6 +37,17 @@ textarea {
   }
 }
 
+.flash {
+
+}
+
+.notices-bar {
+  margin-top: 79px;
+  min-height:20px !important;
+  line-height: 22px;
+  padding-top: 5px; padding-bottom: 5px;
+  text-align: left; 
+}
 
 /* centered columns styles */
 .row-centered {
@@ -60,6 +71,18 @@ textarea {
     margin-right:-4px;
 }
 
+
+.panel {
+    border: 0;
+}
+
+.table > thead > tr > th, .table > thead > tr > td {
+    border: 0;
+}
+
+.panel-default > .panel-heading {
+  background-color: white;
+}
 
 
 
@@ -123,6 +146,10 @@ textarea {
     left: 0;
 }
 
+.navbar {
+  background-color: white;
+}
+
 
 
 
@@ -142,7 +169,9 @@ textarea {
 
 .thumbnails { border:0; }
 
-
+.well {
+  background-color: white;
+}
 
 .upload {
   vertical-align: bottom;
@@ -150,8 +179,48 @@ textarea {
   padding-top: 0px;
 }
 
+.add-set{
+  padding-bottom: 0px;
+  padding-top: 0px;
+  margin-bottom: 2px;
+}
+
+.duplicate-set{
+  padding-bottom: 0px;
+  padding-top: 0px;
+  margin-bottom: 2px;
+}
+
+.remove-set{
+  padding-bottom: 0px;
+  padding-top: 0px;
+  margin-bottom: 2px;
+}
+
 .glyphicon-plus {
   font-size: 1.6em;
+}
+
+.weight_fields_wrap {
+  .glyphicon-plus {
+  font-size: 0.8em;
+}
+}
+
+.add-set {
+  .glyphicon-plus {
+  font-size: 0.8em;
+  }
+  .glyphicon-list {
+  font-size: 0.8em;
+  }
+  .glyphicon-minus {
+  font-size: 0.8em;
+  }
+}
+
+.btn-sm {
+  font-size: 0.7em;
 }
 
 .glyphicon-ok {
@@ -186,6 +255,13 @@ textarea {
   right:10px;
 }
 
+.workout-date {
+  position:absolute;
+  bottom:1px;
+  right:90px;
+}
+
+
 
 #cancel-after-stats {
   position:absolute;
@@ -209,6 +285,24 @@ textarea {
   position:absolute;
   top:10px;
   right:30px;
+}
+
+#cancel-add-workout {
+  position:absolute;
+  top:10px;
+  right:10px;
+}
+
+#edit-workout {
+  position:absolute;
+  top:30px;
+  right:30px;
+}
+
+.weight_fields_wrap{
+  .glyphicon-trash{
+
+  }
 }
 
 .edit-before-stats-button {
@@ -239,6 +333,12 @@ textarea {
     }
 }
 
+.workouts:hover {
+    #edit-workout{
+    opacity:1;
+    }
+}
+
 div.vertical-line{
   width: 1px; /* Line width */
   background-color: black; /* Line color */
@@ -257,6 +357,11 @@ div.vertical-line{
 .vertical_line{height:150px; width:1px;background:#000;}
 
 
+
+#custom-templates .empty-message {
+  padding: 5px 10px;
+ text-align: center;
+}
 
 
 
@@ -277,6 +382,71 @@ margin-right: -15px !important;
 .navbar-right {
 float: right!important;
 }
+
+.set-buttons {
+
+}
+
+.exercise-name {
+  font-size: 1.2em;
+}
+
+
+
+
+
+
+
+
+.tt-query {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.typeahead,
+.tt-input,
+.tt-hint {
+  color: #999;
+  width: 385px;
+  height: 33px;
+}
+
+.tt-menu {    /* used to be tt-dropdown-menu in older versions */
+  width: 436px;
+  margin-top: 4px;
+  padding: 4px 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+     -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+          box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.tt-suggestion {
+  padding: 3px 20px;
+  line-height: 24px;
+}
+
+.tt-suggestion.tt-cursor,.tt-suggestion:hover {
+  color: #fff;
+  background-color: #0097cf;
+
+}
+
+.tt-suggestion p {
+  margin: 0;
+}
+
+
+
+
+
+
 
 
 

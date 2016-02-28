@@ -49,27 +49,6 @@
 </div>
 
 
-<script type="text/javascript">
-
-		 $(document).on("change", ".before-upload input:file", function() {
-
-       var fileName = $(this).val().replace(/.*(\/|\\)/, '');
-       $(".filename-before").html(fileName);
-       $("#beforeinput").attr('class', 'glyphicon glyphicon-ok');
-       
-     });
-
-		 $(document).on("change", ".after-upload input:file", function() {
-     	 
-       var fileName = $(this).val().replace(/.*(\/|\\)/, '');
-       $(".filename-after").html(fileName);
-       $("#afterinput").attr('class', 'glyphicon glyphicon-ok');
-       
-     });
-
-</script>
-
-
 
 
 

@@ -26,5 +26,6 @@ module Milonos
     config.assets.initialize_on_precompile = true
     config.active_record.schema_format = :sql
     config.autoload_paths += %W(#{config.root}/app/uploaders)
+
   end
 end

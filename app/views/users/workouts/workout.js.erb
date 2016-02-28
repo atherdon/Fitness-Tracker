@@ -1,0 +1,9 @@
+
+
+$('#workouts').append('<%= j render partial: 'users/workouts/workout', collection: @workouts, as: :workout %>');
+<% if @workouts.next_page %>
+  $('.pagination').replaceWith('<%= j will_paginate @workouts %>');
+<% else %>
+  $(window).off('scroll');
+  $('.pagination').remove();
+<% end %>

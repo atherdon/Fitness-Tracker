@@ -18,6 +18,10 @@ Rails.application.routes.draw do
   patch '/:username/update_after_stats' => 'users#update_after_stats', as: :update_after_stats
   patch '/:username/update_before_stats' => 'users#update_before_stats', as: :update_before_stats
 
+  get 'typeahead/:query' => 'workout_types#typeahead'
+
+  post '/:username/add_workout' => 'workouts#workout', as: :add_workout
+
   root 'users#index'
 
 

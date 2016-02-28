@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  xset_id: 
+  number: 1
+
+two:
+  xset_id: 
+  number: 1

@@ -11,6 +11,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-script-source'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -52,9 +53,14 @@ gem 'remotipart', '~> 1.2'
 
 gem 'gon'
 
-
-
-
+gem 'bootstrap-multiselect-rails'
+gem 'twitter-typeahead-rails'
+gem 'searchkick'
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
+gem 'browser-timezone-rails'
+gem 'will_paginate', '~> 3.0.6'
+gem 'fotoramajs'
 
 
 group :development, :test do

@@ -44,6 +44,38 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: exercises; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE exercises (
+    id integer NOT NULL,
+    workout_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    name character varying
+);
+
+
+--
+-- Name: exercises_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE exercises_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: exercises_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE exercises_id_seq OWNED BY exercises.id;
+
+
+--
 -- Name: pictures; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -80,6 +112,39 @@ ALTER SEQUENCE pictures_id_seq OWNED BY pictures.id;
 
 
 --
+-- Name: reps; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE reps (
+    id integer NOT NULL,
+    xset_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    weight integer,
+    reps integer
+);
+
+
+--
+-- Name: reps_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE reps_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: reps_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE reps_id_seq OWNED BY reps.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -111,7 +176,8 @@ CREATE TABLE users (
     before integer,
     after integer,
     stats_before hstore,
-    stats_after hstore
+    stats_after hstore,
+    weight_type character varying
 );
 
 
@@ -135,16 +201,54 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 
 
 --
+-- Name: workout_types; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE workout_types (
+    id integer NOT NULL,
+    name character varying,
+    guide character varying,
+    mechanics character varying,
+    workout_type character varying,
+    level character varying,
+    main_muscle character varying,
+    other_muscles character varying,
+    force character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: workout_types_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE workout_types_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: workout_types_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE workout_types_id_seq OWNED BY workout_types.id;
+
+
+--
 -- Name: workouts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE workouts (
     id integer NOT NULL,
     user_id integer,
-    exercises hstore,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    volume character varying
+    volume character varying,
+    date date
 );
 
 
@@ -168,10 +272,56 @@ ALTER SEQUENCE workouts_id_seq OWNED BY workouts.id;
 
 
 --
+-- Name: xsets; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE xsets (
+    id integer NOT NULL,
+    exercise_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    number integer
+);
+
+
+--
+-- Name: xsets_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE xsets_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: xsets_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE xsets_id_seq OWNED BY xsets.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY exercises ALTER COLUMN id SET DEFAULT nextval('exercises_id_seq'::regclass);
+
+
+--
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY pictures ALTER COLUMN id SET DEFAULT nextval('pictures_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY reps ALTER COLUMN id SET DEFAULT nextval('reps_id_seq'::regclass);
 
 
 --
@@ -185,7 +335,29 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY workout_types ALTER COLUMN id SET DEFAULT nextval('workout_types_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY workouts ALTER COLUMN id SET DEFAULT nextval('workouts_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY xsets ALTER COLUMN id SET DEFAULT nextval('xsets_id_seq'::regclass);
+
+
+--
+-- Name: exercises_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY exercises
+    ADD CONSTRAINT exercises_pkey PRIMARY KEY (id);
 
 
 --
@@ -197,6 +369,14 @@ ALTER TABLE ONLY pictures
 
 
 --
+-- Name: reps_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY reps
+    ADD CONSTRAINT reps_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -205,11 +385,34 @@ ALTER TABLE ONLY users
 
 
 --
+-- Name: workout_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY workout_types
+    ADD CONSTRAINT workout_types_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: workouts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY workouts
     ADD CONSTRAINT workouts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: xsets_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY xsets
+    ADD CONSTRAINT xsets_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_exercises_on_workout_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_exercises_on_workout_id ON exercises USING btree (workout_id);
 
 
 --
@@ -231,6 +434,13 @@ CREATE INDEX index_pictures_on_user_id_and_attachment ON pictures USING btree (u
 --
 
 CREATE INDEX index_pictures_on_workout_id ON pictures USING btree (workout_id);
+
+
+--
+-- Name: index_reps_on_xset_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_reps_on_xset_id ON reps USING btree (xset_id);
 
 
 --
@@ -269,17 +479,17 @@ CREATE INDEX index_users_on_stats_before ON users USING gist (stats_before);
 
 
 --
--- Name: index_workouts_on_exercises; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_workouts_on_exercises ON workouts USING gist (exercises);
-
-
---
 -- Name: index_workouts_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_workouts_on_user_id ON workouts USING btree (user_id);
+
+
+--
+-- Name: index_xsets_on_exercise_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_xsets_on_exercise_id ON xsets USING btree (exercise_id);
 
 
 --
@@ -298,11 +508,35 @@ ALTER TABLE ONLY pictures
 
 
 --
+-- Name: fk_rails_665d500cdc; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY exercises
+    ADD CONSTRAINT fk_rails_665d500cdc FOREIGN KEY (workout_id) REFERENCES workouts(id);
+
+
+--
 -- Name: fk_rails_75b776f840; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY workouts
     ADD CONSTRAINT fk_rails_75b776f840 FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
+-- Name: fk_rails_82fb49538a; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY xsets
+    ADD CONSTRAINT fk_rails_82fb49538a FOREIGN KEY (exercise_id) REFERENCES exercises(id);
+
+
+--
+-- Name: fk_rails_8ff78eebfe; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY reps
+    ADD CONSTRAINT fk_rails_8ff78eebfe FOREIGN KEY (xset_id) REFERENCES xsets(id);
 
 
 --
@@ -350,4 +584,38 @@ INSERT INTO schema_migrations (version) VALUES ('20151231030420');
 INSERT INTO schema_migrations (version) VALUES ('20160201143953');
 
 INSERT INTO schema_migrations (version) VALUES ('20160201171019');
+
+INSERT INTO schema_migrations (version) VALUES ('20160209213201');
+
+INSERT INTO schema_migrations (version) VALUES ('20160210195423');
+
+INSERT INTO schema_migrations (version) VALUES ('20160210200543');
+
+INSERT INTO schema_migrations (version) VALUES ('20160215184347');
+
+INSERT INTO schema_migrations (version) VALUES ('20160215184657');
+
+INSERT INTO schema_migrations (version) VALUES ('20160215184829');
+
+INSERT INTO schema_migrations (version) VALUES ('20160216001940');
+
+INSERT INTO schema_migrations (version) VALUES ('20160216002443');
+
+INSERT INTO schema_migrations (version) VALUES ('20160216004847');
+
+INSERT INTO schema_migrations (version) VALUES ('20160216125955');
+
+INSERT INTO schema_migrations (version) VALUES ('20160216130134');
+
+INSERT INTO schema_migrations (version) VALUES ('20160216152253');
+
+INSERT INTO schema_migrations (version) VALUES ('20160216153038');
+
+INSERT INTO schema_migrations (version) VALUES ('20160216225418');
+
+INSERT INTO schema_migrations (version) VALUES ('20160218165819');
+
+INSERT INTO schema_migrations (version) VALUES ('20160219214947');
+
+INSERT INTO schema_migrations (version) VALUES ('20160225081609');
 

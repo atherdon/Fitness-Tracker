@@ -1,1 +1,147 @@
-<div></div>
+
+<div class="workouts">
+<div class="col-md-10 col-md-offset-1">
+<hr>
+
+<% if current_user %>
+		<span class="glyphicon glyphicon glyphicon-edit" id="edit-workout" ></span>
+<% end %>
+
+<% if workout.pictures.exists? %>
+	<div class="col-md-6">
+		<div class="fotorama" data-nav="thumbs" data-allowfullscreen="true" data-maxheight="100%" data-minheight="600" >
+
+		<% workout.pictures.each do |pic| %>
+
+		<%= image_tag pic.attachment.url(:index) %>
+
+		<% end %>
+		</div>
+	</div>
+<% else %>
+	<div class="col-md-6">
+		<%= image_tag("taurus-opaque.png") %>
+	</div>
+<% end %>
+
+
+
+	<% @row_index = 0 %>
+	<% workout.exercises.each_with_index do |ex, index| %>
+	
+		<div class="col-md-2">
+		<div class="panel panel-default">
+			<div class="panel-heading"><%= ex.name %></div>
+			<small>
+			<table class="table">
+				<tr>
+					<th>Set</th>
+					<th>Weight</th>
+					<th>Reps</th>
+				</tr>
+				<% ex.xsets.each_with_index do |set, index| %>
+				<tr>
+					<td><%= (index + 1) %></td>
+					<td><%= set.rep.weight %></td>
+					<td><%= set.rep.reps %></td> 
+				</tr>
+
+				<% end %>
+			</table>
+			</small>
+		</div>
+		</div>
+
+	<% end %>
+</div>
+<div class="col-md-12">
+	<br>
+	<h4><small><%= workout.date.to_datetime.strftime("%d %b %Y") %></small></h4>
+</div>
+</div>
+
+
+
+
+
+
+
+<!-- EDIT WORKOUT -->
+
+<div class="col-md-10 col-md-offset-1 edit-workout">
+	<div style="display:none;" id="edit-workout-form">
+		<div class="well row row-centered">
+		<%= form_for @user, url: add_workout_path, method: :post, :authenticity_token => true, html: { multipart: true }, remote: true, as: :workoutpics do |f| %>
+
+		<div class="col-md-6">
+			<div class="thumbnail workout-pics">
+		    <label for="workoutpics" class="glyphicon glyphicon-plus" id="workout-pics" %></label>
+		    <%= f.file_field :attachment, style:"display: none", id:"workoutpics", multiple:"multiple", name:"images[]" %>
+
+		    <h3><small>(Optional)</small></h3>
+
+		    <span class="filename-after"></span>
+		    <br><br>
+
+				<%= image_tag("zyzz.jpg") %>
+			</div>
+		</div>
+
+			<span class="glyphicon glyphicon-remove" id="cancel-edit-workout"></span>
+
+			<div class="input_fields_wrap_add_workout">
+
+	    <div class="col-md-6">
+	    <div class="input-group">
+	    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	      <input class="typeahead" type="text" autocomplete="off" placeholder="Add an exercise ...">
+	    </div><!-- /input-group -->
+	  	<br>
+
+
+			<hr>
+
+			 
+			  
+
+			  <div class="weight_fields_wrap">
+			  	
+
+			  </div>
+
+
+			 
+			</div>
+
+			<hr>
+		</div>
+
+		<div class='col-md-4 col-md-offset-1'>
+		  <div class="form-group">
+		      <div class='input-group date' id='datetimepicker1'>
+		          <input type='text' class="form-control" name="date" />
+		          <span class="input-group-addon">
+		              <span class="glyphicon glyphicon-calendar"></span>
+		          </span>
+		      </div>
+		  </div>
+		</div> 
+		<br><br><br><br><br><br>
+
+		<div class='col-md-4 col-md-offset-1'>
+		<%= f.button "Add Session", class: "btn btn-primary", name: "commit", value: "conceal", data: { disable_with: "Please wait..." } %>
+		<% end %>
+		</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+

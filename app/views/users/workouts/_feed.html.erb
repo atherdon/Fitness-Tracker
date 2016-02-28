@@ -1,15 +1,21 @@
-<div class="row row-centered">
-	
-	<div class="col-md-12">
+<div class="feed row row-centered">
 
 
-	</div>
 
-	<% if @user.workouts.any? %>
-	<div class="col-md-12">
 
+		<%= render 'users/workouts/add_workout' %>
+
+		<% if @user.workouts.any? %>
+
+		<div id="workouts">
+		<%= render partial: 'users/workouts/workout', collection: @workouts, as: :workout %>
+		</div>
+
+		<% end %>
 		
-	</div>
-	<% end %>
+		<div id="infinite-scrolling">
+  		<%= will_paginate @workouts %>
+		</div>
+
 
 </div>

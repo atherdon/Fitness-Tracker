@@ -8,6 +8,11 @@ class UsersController < ApplicationController
     @picture = Picture.new
     gon.before_stats = @user.stats_before
     gon.after_stats = @user.stats_after
+    @workouts = Workout.paginate(page: params[:page], per_page: 1).order(created_at: :desc)
+    respond_to do |format|
+      format.html
+      format.js { render file: "/app/views/users/workouts/workout.js.erb" }
+    end
   end
 
   def before_picture
