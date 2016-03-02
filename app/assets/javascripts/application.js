@@ -29,6 +29,12 @@
 
 
 
+
+
+
+
+
+
 $(document).on("change", ".workout-pics input:file", function() {
   var ext = this.value.match(/\.(.+)$/)[1];
     switch (ext) {
@@ -70,10 +76,21 @@ $(document).on("click", "#cancel-pics", function() {
 });
 
 
+
+
+
+
+
+
+
+
+
+
 $(document).on('page:update ready', function () {
 
 $('.fotorama').fotorama();
 
+$('.pagination').hide();
 
 //BEFORE AND AFTER PICTURES
 
@@ -246,22 +263,8 @@ $('#cancel-add-workout').click(function() {
   $('.add-workout').show();
 });
 
-$('#edit-workout').click(function() {
-  var add_button, max_fields, wrapper, x;
-
-  $(this).closest('.workouts').hide();
-
-  $(this).closest('.workouts').next().children("#edit-workout-form").show();
 
 
-  
- 
-});
-
-$('#cancel-edit-workout').click(function() {
-  $('#edit-workout-form').hide();
-  $(this).closest('.workouts').show();
-});
 
 
 
@@ -303,9 +306,15 @@ $('#flash').delay(200).fadeIn('normal', function() {
 
 });
 
+
+
+
+
 //--- TYPEAHEAD WORKOUT FUNCTION ---
 
-$(document).ready(function(){
+$(document).on(' ready', function () {
+
+
 
 var types = new Bloodhound({
   datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
@@ -316,16 +325,20 @@ var types = new Bloodhound({
   }
 });
 
-
-$('.typeahead').typeahead(null, {
-  display: 'name',
-  source: types,
-  minLength: 1,
-  highlight: true
+$('.typeahead').each(function(index, element) {
+  $(element).typeahead(null, {
+    display: 'name',
+    source: types,
+    minLength: 1,
+    highlight: true
+  })
 });
 
+
+
 // this is the event that is fired when a user clicks on a suggestion
-	$('.typeahead').bind('typeahead:selected', function(event, datum, name) {
+	$('.typeahead').each(function(index, element) {
+    $(element).bind('typeahead:selected', function(event, datum, name) {
 
 
 
@@ -388,12 +401,11 @@ $('.typeahead').typeahead(null, {
 
 		});
 
-	});
+	})
 
-
+  });
 
 		
-
 
 
 
@@ -408,6 +420,48 @@ $('.typeahead').typeahead(null, {
 
 
 
+// EDIT WORKOUT MODAL
+
+
+$(document).on('click', '#edit-workout-form #add-set', function() {
+
+  wrapper = $(this).closest('.set-buttons').next()
+  var nameVar = $(wrapper).children(":first").attr('name');
+  var count = $(wrapper).children('input').length / 2;
+
+  var re = /(\[[^\]]*\])\[[^\]]*\]/; 
+  var subst = '$1['+count+']'; 
+
+  var result = nameVar.replace(re, subst);
+
+
+
+
+  $(wrapper).append(
+    '<input type="text" style="width: 56px" name="'+result+'" placeholder="Weight"/>'+
+    ' x '+
+    '<input type="text" style="width: 56px" name="'+result+'" placeholder="Reps"/><br>');
+});
+
+$(document).on('click', '#edit-workout-form #remove-set', function() {
+
+
+});
+
+$(document).on('click', '#edit-workout-form #duplicate-set', function() {
+
+
+  $(wrapper).append(
+    '<input type="text" style="width: 56px" name="'+name+'" placeholder="Sets" id="sets"/>'+
+    '<input type="text" style="width: 56px" name="exercise[]" placeholder="Reps"/>');
+});
+
+$(document).on('click', '#edit-workout-form #delete', function() {
+
+  $('.'+name+'-set-wrap').remove();
+  $('.'+name).remove();
+
+});
 
 
 

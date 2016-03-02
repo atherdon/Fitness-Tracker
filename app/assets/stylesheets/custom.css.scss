@@ -14,6 +14,28 @@ $gray-medium-light: #eaeaea;
 
 /* universal */
 
+h3, .h3 {
+
+    padding: 0px;
+    margin: 0px;
+}
+
+h2, .h2 {
+
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+.modal-dialog {
+  padding-top: 15%;
+
+}
+
+.edit-workout-dialog{
+    padding-top: 3%;
+}
+
+
 * {
   border-radius: 0 !important;
 }
@@ -201,6 +223,10 @@ textarea {
   font-size: 1.6em;
 }
 
+.glyphicon-option-horizontal {
+  font-size: 0.7em;
+}
+
 .weight_fields_wrap {
   .glyphicon-plus {
   font-size: 0.8em;
@@ -293,10 +319,17 @@ textarea {
   right:10px;
 }
 
+#cancel-edit-workout {
+  position:absolute;
+  top:10px;
+  right:10px;
+}
+
 #edit-workout {
   position:absolute;
   top:30px;
   right:30px;
+  opacity:0.1;
 }
 
 .weight_fields_wrap{
@@ -391,6 +424,11 @@ float: right!important;
   font-size: 1.2em;
 }
 
+.user-stats {
+  vertical-align: top;
+}
+
+
 
 
 
@@ -425,6 +463,32 @@ float: right!important;
   -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
      -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
           box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.edit-workout-dialog {
+  .tt-menu {  
+    width: 336px;
+  }
+
+  .typeahead,
+  .tt-input,
+  .tt-hint {
+    color: #999;
+    width: 336px;
+    height: 33px;
+  }
+
+  .thumbnail {
+    height: 600px;
+    min-height: 600px;
+    min-width: 430px;
+    display: table-cell!important;
+    vertical-align: bottom;
+    padding: 0px 0px 0px 0px;
+
+  }
+
+
 }
 
 .tt-suggestion {

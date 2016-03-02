@@ -10,7 +10,7 @@
 			
 			<%= form_for @picture, url: delete_before_pic_path, method: :delete, :authenticity_token => true, html: { multipart: true }, remote: true do |f| %>
 				<%= button_tag(type: "submit", class: "btn transparent", name: "commit", value: "conceal") do %>
- 			    <span class="glyphicon glyphicon-remove-circle red" aria-hidden="true"></span>
+ 			    <span class="glyphicon glyphicon-remove-circle red" aria-hidden="true" style="cursor:pointer"></span>
 				<% end %> 
 			<% end %>
 
@@ -21,7 +21,7 @@
 		<div class="before-up">
 			<%= form_for @picture, url: before_picture_path, method: :post, :authenticity_token => true, html: { multipart: true }, remote: true do |f| %>
 
-		    <label for="inputFileBefore", class="glyphicon glyphicon-plus", id= "beforeinput" %></label>
+		    <label for="inputFileBefore" class="glyphicon glyphicon-plus" id= "beforeinput" style="cursor:pointer" %></label>
 		    <%= f.file_field :attachment, style:"display: none", id:"inputFileBefore" %>
 		    <%= f.hidden_field 'bora', value: "before" %>
 		    <br>

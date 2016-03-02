@@ -4,23 +4,31 @@
 
 <div class="container light-background">
 
-	<div class="col-md-6 col-md-offset-3">
+	<div class="col-md-6 col-md-offset-5">
 		<h2>
 		<%= @user.username %>&nbsp;
 		
 		<% if not current_user %>
-		<span class="btn btn-default">Follow</span>
-		<% else %>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<span class="btn btn-default">Follow</span>		
 		<% end %>
-		
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		&nbsp;
-		<span class="glyphicon glyphicon-menu-up margin"><%= @user.workouts.count %></span>
-		&nbsp;
-		<span class="glyphicon glyphicon-equalizer margin"><%= @user.workouts.count %></span>
+		<span class="glyphicon glyphicon-option-horizontal margin" style="cursor:pointer" data-toggle="modal" data-target=".bs-example-modal-sm"></span>		
+	
 		</h2>
 	</div>
+
+	<div class="col-md-6 col-md-offset-4">
+		<div class="user-stats">
+			<h3><small>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<b><%= @user.workouts.count %></b> sessions
+			&nbsp;
+			<b>0</b> followers
+			&nbsp;
+			<b>0</b> following
+			</small></h3>
+		</div>
+	</div>
+	
 	<br><br><br><br>
 
 	
@@ -32,9 +40,30 @@
 
 	<%= render 'users/workouts/feed' %>
 
+
 </div>
 
 
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+
+
+     		<button type="button" class="btn btn-default btn-lg col-md-12">
+  				<span class="glyphicon glyphicon-flag" aria-hidden="true" selected></span> Report Inapproriate Image
+				</button>
+
+				<button type="button" class="btn btn-default btn-lg col-md-12">
+  				<div style="color:Red;">Block User</div>
+				</button>
+
+				<div class="col-md-12" style="background-color:White;"><br><br></div>
+
+				<button type="button" class="btn btn-default btn-lg col-md-12" data-dismiss="modal" aria-hidden="true">Cancel</button>
+     	
+    </div>
+  </div>
+</div>
 
 
 

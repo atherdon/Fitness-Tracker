@@ -10,7 +10,7 @@
 			
 			<%= form_for @picture, url: delete_after_pic_path, method: :delete, :authenticity_token => true, html: { multipart: true }, remote: true do |f| %>
 				<%= button_tag(type: "submit", class: "btn transparent", name: "commit", value: "conceal") do %>
- 			    <span class="glyphicon glyphicon-remove-circle red" aria-hidden="true"></span>
+ 			    <span class="glyphicon glyphicon-remove-circle red" style="cursor:pointer" aria-hidden="true"></span>
 				<% end %> 
 			<% end %>
 
@@ -22,7 +22,7 @@
 	<% else %>
 		<%= form_for @picture, url: after_picture_path, method: :post, :authenticity_token => true, html: { multipart: true }, remote: true do |f| %>
 
-    <label for="inputFileAfter", class="glyphicon glyphicon-plus", id="afterinput" %></label>
+    <label for="inputFileAfter" class="glyphicon glyphicon-plus" style="cursor:pointer" id="afterinput" %></label>
     <%= f.file_field :attachment, style:"display: none", id:"inputFileAfter" %>
     <%= f.hidden_field 'bora', value: "after" %>
     <br>
