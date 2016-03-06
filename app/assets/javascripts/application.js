@@ -11,11 +11,11 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery_ujs
 //= require jquery.cookie
 //= require jstz
 //= require browser_timezone_rails/set_time_zone
 //= require jquery.turbolinks
-//= require jquery_ujs
 //= require jquery.remotipart
 //= require jquery-fileupload
 //= require bootstrap
@@ -288,6 +288,10 @@ $('#datetimepicker1').datetimepicker({
   format: 'MM/DD/YYYY'
 });
 
+$('#datetimepicker2').datetimepicker({
+  format: 'MM/DD/YYYY'
+});
+
 
 
 // flash
@@ -357,7 +361,7 @@ $('.typeahead').each(function(index, element) {
  
     
 
-		$(wrapper).append('<div class="'+name+'">'+
+		$(wrapper).append('<div class="appended"><div class="'+name+'">'+
 				'&nbsp;&nbsp;&nbsp;&thinsp;&thinsp;&thinsp;&thinsp;'+
 				'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input disabled="disabled" class="exercise-name" type="text" style="width: 258px" name="exercise[]" value="'+nameDisplay+'"/>'+
 			  '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-trash exercise-delete" id="'+name+'-delete" aria-hidden="true"></span>'+
@@ -369,7 +373,7 @@ $('.typeahead').each(function(index, element) {
 			  '</div>'+
 			  '<div class="'+name+'-set-wrap">'+
 			  '</div><hr>'+
-			  '</div>');
+			  '</div></div>');
 
 		$(document).on('click', '#'+name+'-add-set', function() {
       x++;
@@ -462,6 +466,50 @@ $(document).on('click', '#edit-workout-form #delete', function() {
   $('.'+name).remove();
 
 });
+
+
+
+$(document).on('hide.bs.modal','#modal', function () {
+                
+  $('div.appended').remove();
+
+});
+
+
+
+
+$(document).on('click', '#remove-session-pic', function() {
+
+  $(this).closest('.col-md-6').remove();
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

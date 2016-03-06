@@ -1,4 +1,5 @@
 class WorkoutsController < ApplicationController
+	before_action :check_user, only: [:workout, :update_workout]
 
 	def workout
 		@user = current_user
@@ -39,8 +40,9 @@ class WorkoutsController < ApplicationController
 			end
 
 			if @saved = true 
+				@workouts = Workout.paginate(page: params[:page], per_page: 1).order(created_at: :desc)
 				respond_to do |format|
-					format.js { render file: "/app/views/users/workouts/add_workout.js.erb", :locals => {:workout => @workout} }
+					format.js { render file: "/app/views/users/workouts/add_workout.js.erb" }
 				end
 			else
 				flash.now[:error] = "Error."	
@@ -51,8 +53,17 @@ class WorkoutsController < ApplicationController
 		end 
 	end
 
+	def update_workout
+
+	end
+
 private
 
+	def check_user
+		unless params[:username] = current_user.username
+			flash.now[:alert] = "Incorrect user." and return
+		end
+	end
 
 end
 

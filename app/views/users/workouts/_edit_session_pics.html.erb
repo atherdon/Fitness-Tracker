@@ -1,0 +1,20 @@
+<div class="col-md-12 edit-pics">
+<% workout.pictures.each do |pic| %>
+	<div class="col-md-6 container">
+
+	<div class="dark-background">
+	<%= image_tag pic.attachment.url(:edit) %>
+	</div>
+
+	<%= form_tag delete_session_pic_path, method: :post, :authenticity_token => true, html: { multipart: true }, remote: true do |f| %>
+		<%= button_tag(type: "submit", class: "btn transparent", name: "commit", value: "conceal") do %>
+		    <span class="glyphicon glyphicon-remove-circle red" id="remove-session-pic" aria-hidden="true" style="cursor:pointer"></span>
+		    <%= hidden_field_tag :pic_id, pic.id %>
+		<% end %> 
+	<% end %>
+	
+
+	</div>
+<% end %>
+
+</div>

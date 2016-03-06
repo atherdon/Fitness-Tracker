@@ -12,7 +12,7 @@
 
 	<div class="col-md-6">
 		<div class="thumbnail workout-pics">
-	    <label for="workoutpics" class="glyphicon glyphicon-plus" id="workout-pics" %></label>
+	    <label for="workoutpics" class="glyphicon glyphicon-plus" style="cursor:pointer" id="workout-pics" %></label>
 	    <%= f.file_field :attachment, style:"display: none", id:"workoutpics", multiple:"multiple", name:"images[]" %>
 
 	    <h3><small>(Optional)</small></h3>
@@ -24,7 +24,7 @@
 		</div>
 	</div>
 
-		<span class="glyphicon glyphicon-remove" id="cancel-add-workout"></span>
+		<span class="glyphicon glyphicon-remove" style="cursor:pointer" id="cancel-add-workout"></span>
 
 		<div class="input_fields_wrap_add_workout">
 

@@ -148,8 +148,28 @@ textarea {
   display: table-cell!important;
   vertical-align: bottom;
   padding: 0px 0px 0px 0px;
+  
+}
+
+.edit-workout-pics {
+
+    height: 150px;
+    min-height: 150px;
+    min-width: 114px;
+    display: table-cell!important;
+    vertical-align: top;
+    padding: 0px 0px 0px 0px;
 
 }
+
+.edit-image-hover {
+    
+    div:hover {
+    opacity:0.3;
+    }
+
+}
+
 
 .thumbnails > li { border: 0px; }
 
@@ -397,6 +417,15 @@ div.vertical-line{
 }
 
 
+.img-responsive {
+  opacity:0.3;
+}
+
+
+
+
+
+
 
 /* non collapseable navbar ? */
 
@@ -505,9 +534,6 @@ float: right!important;
 .tt-suggestion p {
   margin: 0;
 }
-
-
-
 
 
 

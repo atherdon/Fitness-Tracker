@@ -140,7 +140,7 @@
 </div>
 
 <% if current_user %>
-<div class="modal fade edit-workout-modal-<%= workout.id %>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+<div class="modal fade edit-workout-modal-<%= workout.id %>" id="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
   <div class="modal-dialog edit-workout-dialog modal-lg">
     <div class="modal-content">
 
@@ -148,96 +148,100 @@
         <div id="edit-workout-form">
           <div class="well row row-centered">
 
-          <%= form_for @user, url: add_workout_path, method: :post, :authenticity_token => true, html: { multipart: true }, remote: true, as: :workoutpics do |f| %>
+          
 
           <div class="col-md-6">
-            <div class="thumbnail workout-pics">
+            
+          <div class=" ">  
+          <div class="edit-workout-pics">
+
+          		<%= render partial: 'users/workouts/edit_session_pics', :locals => {workout: workout} %>
+            	
+					
+
+							<br><br><br>
+
+							<%= form_for @user, url: add_workout_path, method: :post, :authenticity_token => true, html: { multipart: true }, remote: true, as: :workoutpics do |f| %>
+
+							<div class="col-md-12">
+							<br><br><br><br><br><br>
+
               <label for="workoutpics" class="glyphicon glyphicon-plus" id="workout-pics" %></label>
               <%= f.file_field :attachment, style:"display: none", id:"workoutpics", multiple:"multiple", name:"images[]" %>
 
-              <h3><small>(Optional)</small></h3>
-              <%= workout.date %>
+              <h3><small>(Add more images)</small></h3>
+              
               <span class="filename-after"></span>
-              <br><br>
+              <br><br><br><br><br><br>
+              </div>
+              
 
-            </div>
+          </div>
+           </div>
           </div>
 
-            <span class="glyphicon glyphicon-remove" id="cancel-edit-workout" style="cursor:pointer"></span>
+          <span class="glyphicon glyphicon-remove" id="cancel-edit-workout" style="cursor:pointer"></span>
 
-            <div class="input_fields_wrap_add_workout">
+          <div class="col-md-6">
+          <div class="input_fields_wrap_add_workout">
 
-            <div class="col-md-6">
+          
             <div class="input-group">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <input class="typeahead" type="text" autocomplete="off" placeholder="Add an exercise ...">
             </div><!-- /input-group -->
             <br>
-
-
             <hr>
+            <div class="weight_fields_wrap">
+	              <% workout.exercises.each_with_index do |ex, index| %>
+	              <div class="<%= ex.name %>">
+								&nbsp;&nbsp;&nbsp;&thinsp;&thinsp;&thinsp;&thinsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<input disabled="disabled" class="exercise-name" type="text" style="width: 258px" name="exercise[]" value="<%= ex.name %>"/>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<span class="glyphicon glyphicon-trash exercise-delete" id="delete" aria-hidden="true"></span>
+							  <br>
 
-             
-              
-
-              <div class="weight_fields_wrap">
-
-              <% workout.exercises.each_with_index do |ex, index| %>
-
-              <div class="<%= ex.name %>">
-							&nbsp;&nbsp;&nbsp;&thinsp;&thinsp;&thinsp;&thinsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<input disabled="disabled" class="exercise-name" type="text" style="width: 258px" name="exercise[]" value="<%= ex.name %>"/>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<span class="glyphicon glyphicon-trash exercise-delete" id="delete" aria-hidden="true"></span>
-						  <br>
-
-			  			<div class="set-buttons"</div>
-		  			  <button type="button" class="btn btn-default btn-sm add-set" aria-label="Left Align" id="add-set"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp; Add Set</button>
-		  			  <button type="button" class="btn btn-default btn-sm remove-set" aria-label="Left Align" id="remove-set"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>&nbsp; Remove Set</button>
-		  			  <button type="button" class="btn btn-default btn-sm duplicate-set" aria-label="Left Align" id="duplicate-set"><span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span>&nbsp; Duplicate Set</button>
-					  	</div>
-	
+				  			<div class="set-buttons">
+			  			  <button type="button" class="btn btn-default btn-sm add-set" aria-label="Left Align" id="add-set"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp; Add Set</button>
+			  			  <button type="button" class="btn btn-default btn-sm remove-set" aria-label="Left Align" id="remove-set"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>&nbsp; Remove Set</button>
+			  			  <button type="button" class="btn btn-default btn-sm duplicate-set" aria-label="Left Align" id="duplicate-set"><span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span>&nbsp; Duplicate Set</button>
+						  	</div>
 							
-								
-									<div class="set-wrap">
-									<% ex.xsets.each_with_index do |set, index| %>
-									
-										<input type="text" style="width: 56px" name="exercises[<%= ex.name %>][<%= index %>][]" placeholder="Weight" value="<%= set.rep.weight %>"/> x
-        						<input type="text" style="width: 56px" name="exercises[<%= ex.name %>][<%= index %>][]" placeholder="Reps" value="<%= set.rep.reps %>"/><br>
+										<div class="set-wrap">
+										<% ex.xsets.each_with_index do |set, index| %>
+										
+											<input type="text" style="width: 56px" name="exercises[<%= ex.name %>][<%= index %>][]" placeholder="Weight" value="<%= set.rep.weight %>"/> x
+	        						<input type="text" style="width: 56px" name="exercises[<%= ex.name %>][<%= index %>][]" placeholder="Reps" value="<%= set.rep.reps %>"/><br>
 
-									<% end %>
-									</div><hr>							
-							</div>
+										<% end %>
+										</div><hr>							
+								</div>
+								<% end %>           
+            </div>   
+          
 
-							<% end %>
-                
-
-              </div>
-
-
-             
-            </div>
-
-            <hr>
+         
           </div>
 
-          <div class='col-md-4 col-md-offset-1'>
+          <div class='col-md-12 '>
             <div class="form-group">
-                <div class='input-group date' id='datetimepicker1'>
-                    <input type='text' class="form-control" name="date" />
+                <div class='input-group date' id='datetimepicker2'>
+                    <input type='text' class="form-control" disabled="disabled" name="date" value="<%= workout.date.strftime('%D') %>"/>
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
                 </div>
             </div>
           </div> 
-          <br><br><br><br><br><br>
+          <br>
 
-          <div class='col-md-4 col-md-offset-1'>
-          <%= f.button "Add Session", class: "btn btn-primary", name: "commit", value: "conceal", data: { disable_with: "Please wait..." } %>
-          <% end %>
+          <div class='col-md-12 edit-submit'>
+	          <%= f.button "Update Session", class: "btn btn-primary", name: "commit", value: "conceal", data: { disable_with: "Please wait..." } %>
+	          <% end %>
           </div>
+          </div>
+
           </div>
         </div>
       </div>

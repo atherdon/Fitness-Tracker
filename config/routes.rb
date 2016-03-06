@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   post '/:username/after_picture' => 'pictures#after_picture', as: :after_picture
   delete '/:username/delete_before_pic' => 'pictures#delete_before_pic', as: :delete_before_pic
   delete '/:username/delete_after_pic' => 'pictures#delete_after_pic', as: :delete_after_pic
+  post '/:username/delete_session_pic' => 'pictures#delete_session_pic', as: :delete_session_pic
   
   post '/:username/after_stats' => 'users#after_stats', as: :add_after_stats
   post '/:username/before_stats' => 'users#before_stats', as: :add_before_stats
@@ -21,6 +22,8 @@ Rails.application.routes.draw do
   get 'typeahead/:query' => 'workout_types#typeahead'
 
   post '/:username/add_workout' => 'workouts#workout', as: :add_workout
+
+
 
   root 'users#index'
 

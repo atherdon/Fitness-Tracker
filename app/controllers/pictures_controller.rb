@@ -1,6 +1,6 @@
 class PicturesController < ApplicationController
 	before_action :check_bora, only: [:create]
-	before_action :check_user_before_delete, only: [:delete_before_pic, :delete_after_pic]
+	before_action :check_user_before_delete, only: [:delete_before_pic, :delete_after_pic, :delete_session_pic]
 
 	def new
 		@picture = Picture.new
@@ -65,7 +65,21 @@ class PicturesController < ApplicationController
 				@user.update_attribute(:after, nil)
 				format.js { render file: "/app/views/users/profile_images/delete_after_pic.js.erb" }
 			else
-				format.html { render 'show' }
+				format.html { render @user }
+			end
+		end
+	end
+
+	def delete_session_pic
+		@user = current_user
+		@picture = Picture.find(params[:pic_id])
+		id = @picture.workout_id
+		@workout = Workout.find(id)
+		respond_to do |format|
+			if Picture.destroy(params[:pic_id]) 	
+				format.html { head :no_content }
+			else
+				format.html { render @user }
 			end
 		end
 	end
