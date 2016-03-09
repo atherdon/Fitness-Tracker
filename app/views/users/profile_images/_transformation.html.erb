@@ -4,7 +4,7 @@
 	<div class=" col-md-6 col-md-offset-1">
 		<div class="">
 
-			<% if current_user %>
+
 			
 				
 				<%= render 'users/profile_images/before_profile_picture' %>
@@ -17,30 +17,6 @@
 				
 
 
-			<% else  %>
-				<% if @user.before.present? %>
-					<div class="thumbnail">
-						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-					</div>
-					<div class="thumbnail">
-						<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-					</div>
-				<% elsif @user.after.present? %>
-					<div class="thumbnail">
-						<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-					</div>
-					<div class="thumbnail">
-						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-					</div>					
-				<% else %>
-					<div class="thumbnail">
-						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-					</div>
-					<div class="thumbnail">
-						<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-					</div>
-				<% end %>
-			<% end %>
 
 		</div>
 		</div>

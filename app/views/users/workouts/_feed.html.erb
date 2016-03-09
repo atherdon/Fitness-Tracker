@@ -1,9 +1,11 @@
 <div class="feed row row-centered">
 
 
-
+		<% if current_user %>
 
 		<%= render 'users/workouts/add_workout' %>
+
+		<% end %>
 
 		<% if @user.workouts.any? %>
 

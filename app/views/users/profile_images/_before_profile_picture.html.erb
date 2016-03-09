@@ -8,16 +8,19 @@
 		<div class="image dark-background">
 		<div class="delete-pic pic-right">
 			
-			<%= form_for @picture, url: delete_before_pic_path, method: :delete, :authenticity_token => true, html: { multipart: true }, remote: true do |f| %>
-				<%= button_tag(type: "submit", class: "btn transparent", name: "commit", value: "conceal") do %>
- 			    <span class="glyphicon glyphicon-remove-circle red" aria-hidden="true" style="cursor:pointer"></span>
-				<% end %> 
+			<% if current_user %>
+				<%= form_for @picture, url: delete_before_pic_path, method: :delete, :authenticity_token => true, html: { multipart: true }, remote: true do |f| %>
+					<%= button_tag(type: "submit", class: "btn transparent", name: "commit", value: "conceal") do %>
+	 			    <span class="glyphicon glyphicon-remove-circle red" aria-hidden="true" style="cursor:pointer"></span>
+					<% end %> 
+				<% end %>
 			<% end %>
 
 		</div>
-		<%= image_tag Picture.where(id: current_user.before).first.attachment.url(:index) %>
+		<%= image_tag Picture.where(id: @user.before).first.attachment.url(:index) %>
 		</div>
 	<% else %>
+		<% if current_user %>
 		<div class="before-up">
 			<%= form_for @picture, url: before_picture_path, method: :post, :authenticity_token => true, html: { multipart: true }, remote: true do |f| %>
 
@@ -32,5 +35,8 @@
 		   <% end %>
 			<%= link_to image_tag("zyzz.jpg"), root_path %>	
 		</div>
+		<% else %>
+			<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+		<% end %>
 	<% end %>
 </div>
