@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def show
   	@user = User.find_by_username(params[:username])
     @picture = Picture.new
-    @workouts = Workout.paginate(page: params[:page], per_page: 3).order(created_at: :desc)
+    @workouts = @user.workouts.paginate(page: params[:page], per_page: 3).order(created_at: :desc)
     respond_to do |format|
       format.html
       format.js { render file: "/app/views/users/workouts/workout.js.erb" }
