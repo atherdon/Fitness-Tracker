@@ -98,7 +98,7 @@ class WorkoutsController < ApplicationController
 			end
 
 			if @saved = true 
-				@workouts = Workout.paginate(page: params[:page], per_page: 1).order(created_at: :desc)
+				@workouts = Workout.paginate(page: params[:page], per_page: 3).order(created_at: :desc)
 				respond_to do |format|
 					format.js { render file: "/app/views/users/workouts/add_workout.js.erb" }
 				end
@@ -108,7 +108,13 @@ class WorkoutsController < ApplicationController
 					format.js { render file: "/app/views/layouts/notice.js.erb" }
 				end
 			end
+		else
+			@workouts = Workout.paginate(page: params[:page], per_page: 3).order(created_at: :desc)
+			respond_to do |format|
+					format.js { render file: "/app/views/users/workouts/update_workout.js.erb" }
+			end
 		end 
+
 	end
 
 private

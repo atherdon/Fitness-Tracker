@@ -1,2 +1,9 @@
-$('.feed').html("<%= escape_javascript(render partial: 'users/workouts/feed', collection: @workouts, as: :workout ) %>");
+//$('.feed').html("<%= escape_javascript(render partial: 'users/workouts/feed', collection: @user.workouts.paginate(page: params[:page], per_page: 1).order(created_at: :desc) ) %>");
 
+
+$("#workouts").children('.session:last-child').remove();
+
+
+$('#workouts').prepend('<%= j render partial: 'users/workouts/workout', collection: @workouts, as: :workout %>');
+$('#workout-form').hide();
+$('.add-workout').show();

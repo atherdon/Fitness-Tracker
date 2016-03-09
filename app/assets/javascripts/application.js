@@ -159,6 +159,8 @@ $('.fotorama').fotorama();
 
 $('.pagination').hide();
 
+
+
 //BEFORE AND AFTER PICTURES
 
 $(document).on("change", ".before-upload input:file", function() {
@@ -301,6 +303,8 @@ $('.add-workout').click(function() {
   var add_button, max_fields, wrapper, x;
   $('#workout-form').show();
   $('.add-workout').hide();
+
+
 
   max_fields = 10;
   wrapper = $('.input_fields_wrap_add_workout');

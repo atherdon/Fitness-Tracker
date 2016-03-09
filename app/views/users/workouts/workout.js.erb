@@ -1,10 +1,10 @@
 
 
-$('#workouts').append('<%= j render partial: 'users/workouts/workout', collection: @workouts, as: :workout %>');
+$('#workouts').append('<%= j render partial: 'users/workouts/workout', collection: @user.workouts.paginate(page: params[:page], per_page: 3).order(created_at: :desc), as: :workout %>');
 <% if @workouts.next_page %>
-  $('.pagination').replaceWith('<%= j will_paginate @workouts %>');
+  $('.pagination').replaceWith('<%= j will_paginate @user.workouts.paginate(page: params[:page], per_page: 3).order(created_at: :desc) %>');
 <% else %>
   $(window).off('scroll');
-  $('.pagination').remove();
+  //$('.pagination').remove();
 <% end %>
 
