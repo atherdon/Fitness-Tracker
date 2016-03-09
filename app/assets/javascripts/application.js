@@ -86,6 +86,73 @@ $(document).on("click", "#cancel-pics", function() {
 
 
 
+
+
+
+
+
+$(document).on("change", ".edit-workout-pics input:file", function() {
+  var ext = this.value.match(/\.(.+)$/)[1];
+    switch (ext) {
+        case 'jpg':
+        case 'jpeg':
+        case 'png':
+        case 'gif':
+            $('#editworkoutpics').attr('disabled', false);
+            break;
+        default:
+            alert('This is not an allowed file type.');
+            this.value = '';
+            return false;
+    }
+
+  $("#edit-workout-pics").attr('class', 'glyphicon glyphicon-ok');
+  $(".filename-edit-after").empty();
+  for (var i = 0; i < this.files.length; i++)
+    {
+        $(".filename-edit-after").append(this.files[i].name + "<br>");
+    }
+  if ($( "#cancel-pics" ).length ) {
+
+  } else {
+
+  $(".filename-edit-after").append('<br><button type="button" class="btn btn-info btn-sm" aria-label="Left Align" id="cancel-edit-pics">Cancel</button><br>');
+  
+  }
+
+  
+
+});
+
+$(document).on("click", "#cancel-edit-pics", function() {
+  $('#cancel-edit-pics').remove();
+    $(".filename-edit-after").empty();
+    $('#editworkoutpics').val('');
+    $("#editworkoutpics").attr('class', 'glyphicon glyphicon-plus');
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 $(document).on('page:update ready', function () {
 
 $('.fotorama').fotorama();
@@ -351,9 +418,9 @@ $('.typeahead').each(function(index, element) {
     nameDisplay = name
 		name = name.replace(/\s+/g, '-')
 
-    
+    $('.typeahead').typeahead('val','');
 
-		wrapper = $('.weight_fields_wrap');
+		wrapper = $(this).closest('.input-group').nextAll('.weight_fields_wrap');
 
     if ( $('.'+name)[0]) {
       return false;
@@ -375,33 +442,38 @@ $('.typeahead').each(function(index, element) {
 			  '</div><hr>'+
 			  '</div></div>');
 
+   
+
 		$(document).on('click', '#'+name+'-add-set', function() {
       x++;
-	    wrapper = $('.'+name+'-set-wrap')
+	    wrapper = $(this).closest('.set-buttons').next('.'+name+'-set-wrap')
 	    $(wrapper).append(
+        '<div class="inputs">'+
 			  '<input type="text" style="width: 56px" name="exercises['+name+']['+x+'][]" placeholder="Weight"/>'+
         ' x '+
-        '<input type="text" style="width: 56px" name="exercises['+name+']['+x+'][]" placeholder="Reps"/><br>');
+        '<input type="text" style="width: 56px" name="exercises['+name+']['+x+'][]" placeholder="Reps"/><br></div>');
 		});
 
 		$(document).on('click', '#'+name+'-remove-set', function() {
 
-	    wrapper = $('.'+name+'-set-wrap')
+	    wrapper = $(this).parent().next('.'+name+'-set-wrap').children("div:last-child");
+      $(wrapper).remove();
 
 		});
 
 		$(document).on('click', '#'+name+'-duplicate-set', function() {
 
-	    wrapper = $('.'+name+'-set-wrap')
-	    $(wrapper).append(
-	    	'<input type="text" style="width: 56px" name="'+name+'" placeholder="Sets" id="sets"/>'+
-			  '<input type="text" style="width: 56px" name="exercise[]" placeholder="Reps"/>');
+      wrapper_append = $(this).parent().next('.'+name+'-set-wrap');
+	    wrapper = $(this).parent().next('.'+name+'-set-wrap').children("div:last-child").clone();
+
+      $(wrapper_append).append(wrapper);
+
 		});
 
 		$(document).on('click', '#'+name+'-delete', function() {
       x = 0;
-      $('.'+name+'-set-wrap').remove();
-	    $('.'+name).remove();
+      $(this).closest('.'+name+'-set-wrap').remove();
+	    $(this).closest('.'+name).remove();
 
 		});
 
@@ -429,9 +501,10 @@ $('.typeahead').each(function(index, element) {
 
 $(document).on('click', '#edit-workout-form #add-set', function() {
 
-  wrapper = $(this).closest('.set-buttons').next()
-  var nameVar = $(wrapper).children(":first").attr('name');
-  var count = $(wrapper).children('input').length / 2;
+  wrapper = $(this).closest('.set-buttons').next('.set-wrap')
+  var nameVar = $(wrapper).children(".inputs").find("input").attr('name');
+  var count = $(wrapper).children('.inputs').length;
+
 
   var re = /(\[[^\]]*\])\[[^\]]*\]/; 
   var subst = '$1['+count+']'; 
@@ -442,28 +515,32 @@ $(document).on('click', '#edit-workout-form #add-set', function() {
 
 
   $(wrapper).append(
+    '<div class="inputs">'+
     '<input type="text" style="width: 56px" name="'+result+'" placeholder="Weight"/>'+
     ' x '+
-    '<input type="text" style="width: 56px" name="'+result+'" placeholder="Reps"/><br>');
+    '<input type="text" style="width: 56px" name="'+result+'" placeholder="Reps"/><br></div>');
 });
 
 $(document).on('click', '#edit-workout-form #remove-set', function() {
 
+  wrapper = $(this).parent().next('.set-wrap').children("div:last-child");
+      $(wrapper).remove();
 
 });
 
 $(document).on('click', '#edit-workout-form #duplicate-set', function() {
 
 
-  $(wrapper).append(
-    '<input type="text" style="width: 56px" name="'+name+'" placeholder="Sets" id="sets"/>'+
-    '<input type="text" style="width: 56px" name="exercise[]" placeholder="Reps"/>');
+  wrapper_append = $(this).parent().next('.set-wrap');
+      wrapper = $(this).parent().next('.set-wrap').children("div:last-child").clone();
+
+      $(wrapper_append).append(wrapper);
 });
 
 $(document).on('click', '#edit-workout-form #delete', function() {
 
-  $('.'+name+'-set-wrap').remove();
-  $('.'+name).remove();
+  $(this).closest('.set-wrap').remove();
+  $(this).closest('.ex-group').remove();
 
 });
 
@@ -471,7 +548,7 @@ $(document).on('click', '#edit-workout-form #delete', function() {
 
 $(document).on('hide.bs.modal','#modal', function () {
                 
-  $('div.appended').remove();
+  $('div.appended').hide();
 
 });
 

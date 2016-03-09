@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   get 'typeahead/:query' => 'workout_types#typeahead'
 
   post '/:username/add_workout' => 'workouts#workout', as: :add_workout
-
+  post '/:username/update_workout' => 'workouts#update_workout', as: :update_workout
 
 
   root 'users#index'

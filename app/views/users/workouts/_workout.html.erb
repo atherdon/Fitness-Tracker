@@ -143,14 +143,14 @@
 <div class="modal fade edit-workout-modal-<%= workout.id %>" id="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
   <div class="modal-dialog edit-workout-dialog modal-lg">
     <div class="modal-content">
-
+    	<%= form_for @picture, url: update_workout_path, method: :post, :authenticity_token => true, html: { multipart: true }, remote: true do |f| %>
       <div class="col-md-12 edit-workout">
         <div id="edit-workout-form">
           <div class="well row row-centered">
 
           
-
           <div class="col-md-6">
+          <div class="col-md-12">
             
           <div class=" ">  
           <div class="edit-workout-pics">
@@ -161,28 +161,43 @@
 
 							<br><br><br>
 
-							<%= form_for @user, url: add_workout_path, method: :post, :authenticity_token => true, html: { multipart: true }, remote: true, as: :workoutpics do |f| %>
+					
+	
 
-							<div class="col-md-12">
-							<br><br><br><br><br><br>
-
-              <label for="workoutpics" class="glyphicon glyphicon-plus" id="workout-pics" %></label>
-              <%= f.file_field :attachment, style:"display: none", id:"workoutpics", multiple:"multiple", name:"images[]" %>
-
-              <h3><small>(Add more images)</small></h3>
-              
-              <span class="filename-after"></span>
-              <br><br><br><br><br><br>
-              </div>
+							
               
 
           </div>
            </div>
           </div>
 
+          <div class="col-md-12">
+
+          <div class="col-md-8 col-md-offset-3"
+						<br><br><br><br><br><br>
+
+							<div class="edit-workout-pics">
+		          <label for="editworkoutpics" class="glyphicon glyphicon-plus" id="edit-workout-pics" %></label>
+		          <%= f.file_field :attachment, style:"display: none", id:"editworkoutpics", multiple:"multiple", name:"images[]" %>
+
+		          <h3><small>(Add more images)</small></h3>
+		          
+		          <span class="filename-edit-after"></span>
+		          <br><br><br><br><br><br>
+		          </div>
+		      </div>
+          </div>
+
+          </div>
+          
+
+
+          
+
           <span class="glyphicon glyphicon-remove" id="cancel-edit-workout" style="cursor:pointer"></span>
 
           <div class="col-md-6">
+          <div class="col-md-12">
           <div class="input_fields_wrap_add_workout">
 
           
@@ -194,7 +209,7 @@
             <hr>
             <div class="weight_fields_wrap">
 	              <% workout.exercises.each_with_index do |ex, index| %>
-	              <div class="<%= ex.name %>">
+	              <div class="<%= ex.name %> ex-group">
 								&nbsp;&nbsp;&nbsp;&thinsp;&thinsp;&thinsp;&thinsp;
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<input disabled="disabled" class="exercise-name" type="text" style="width: 258px" name="exercise[]" value="<%= ex.name %>"/>
@@ -210,9 +225,10 @@
 							
 										<div class="set-wrap">
 										<% ex.xsets.each_with_index do |set, index| %>
-										
+											<div class="inputs">
 											<input type="text" style="width: 56px" name="exercises[<%= ex.name %>][<%= index %>][]" placeholder="Weight" value="<%= set.rep.weight %>"/> x
 	        						<input type="text" style="width: 56px" name="exercises[<%= ex.name %>][<%= index %>][]" placeholder="Reps" value="<%= set.rep.reps %>"/><br>
+	        						</div>
 
 										<% end %>
 										</div><hr>							
@@ -236,11 +252,19 @@
           </div> 
           <br>
 
+          
+
+          
+          </div>
+          </div>
+
           <div class='col-md-12 edit-submit'>
+          	<%= hidden_field_tag :workout_id, workout.id %>
 	          <%= f.button "Update Session", class: "btn btn-primary", name: "commit", value: "conceal", data: { disable_with: "Please wait..." } %>
 	          <% end %>
           </div>
-          </div>
+
+
 
           </div>
         </div>

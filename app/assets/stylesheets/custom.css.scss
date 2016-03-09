@@ -41,7 +41,7 @@ h2, .h2 {
 }
 
 body {
-  padding-top: 80px;
+  padding-top: 60px;
 }
 
 section {
@@ -124,7 +124,7 @@ textarea {
 {
     position: absolute;
     width: 100%;
-    left: 26px;
+    left: 21px; /* was 26 */
     text-align: center;
     margin: auto;
     padding-top: 0px;
@@ -133,11 +133,11 @@ textarea {
 
 
 .navbar-fixed-top {
-  min-height: 65px;
+  min-height: 30px; /* was 65 */
 }
 
 .navbar-nav li a {
- line-height: 50px;
+ line-height: 30px; /* was 50 */
 }
 
 
