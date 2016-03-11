@@ -140,6 +140,11 @@ textarea {
  line-height: 30px; /* was 50 */
 }
 
+.red-background{
+  background-color: #ffe6e6;
+
+}
+
 
 .thumbnail {
   height: 600px;
@@ -168,6 +173,11 @@ textarea {
     opacity:0.3;
     }
 
+}
+
+.thumbnail {
+    border: 0 none;
+    box-shadow: none;
 }
 
 
@@ -536,8 +546,15 @@ float: right!important;
 }
 
 
+.fotorama__wrap--slide .fotorama__stage__frame {
+    opacity: 1 !important;
+    background-color: black;
+}
 
+.jumbotron{
+    background-color: #e6f2ff; //#e6f2ff
 
+}
 
 
 

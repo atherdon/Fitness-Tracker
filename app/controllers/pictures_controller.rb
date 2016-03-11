@@ -1,6 +1,6 @@
 class PicturesController < ApplicationController
 	before_action :check_bora, only: [:create]
-	before_action :check_user_before_delete, only: [:delete_before_pic, :delete_after_pic, :delete_session_pic]
+	before_action :check_user, only: [:before_picture, :delete_before_pic, :after_picture, :delete_after_pic, :delete_session_pic]
 
 	def new
 		@picture = Picture.new
@@ -86,7 +86,7 @@ class PicturesController < ApplicationController
 
 	private
 
-	def check_user_before_delete
+	def check_user
 		unless params[:username] = current_user.username
 			flash.now[:alert] = "Incorrect user." and return
 		end

@@ -1,4 +1,15 @@
 <header>
+<% if params[:controller] == 'users' && params[:action] == 'index' && !user_signed_in? %>
+<div class="navbar navbar-nav navbar-fixed-top red-background">
+	<div class="navbar-brand navbar-header">
+
+	<%= link_to image_tag("smtaurus3.png"), root_path %>
+
+	</div>
+
+</div>
+<% else %>
+
 <div class="navbar navbar-nav navbar-fixed-top header navbar-default">
 	<div class="container">
 	<ul class="nav navbar-nav navbar-header navbar-left">
@@ -15,7 +26,9 @@
 
 	<% if user_signed_in? %>
 		<ul class="nav navbar-nav navbar-right">
+			<% if current_user %>
 			<li><a href="#" class="glyphicon glyphicon-envelope btn btn-default" style="cursor:pointer" data-toggle="modal" data-target=".suggestion-box-modal"> Suggestion Box</a></li> 
+			<% end %>
 			<li><%= link_to current_user.username, current_user %></li>
 			<li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
 		</ul>
@@ -23,20 +36,20 @@
 		<ul class="nav navbar-nav navbar-right">
 			<li><%= link_to "Login", new_user_session_path %></li>
 			<li><%= link_to "Signup", new_user_registration_path %></li>
-
 		</ul>
+
 	<% end %>
 
 	</div>
 </div>
 </header>
 
-
+<% if current_user %>
 <div class="modal fade suggestion-box-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
 
-    		<%= form_tag add_suggestion_path, method: :post, :authenticity_token => true, remote: true do %>
+    		<%= form_tag add_suggestion_path(current_user),  method: :post, :authenticity_token => true, remote: true do %>
 
 				
     		<div class="modal-body">
@@ -66,3 +79,8 @@
     </div>
   </div>
 </div>
+<% end %>
+
+<% end %>
+
+
