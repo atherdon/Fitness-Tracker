@@ -556,6 +556,12 @@ $(document).on('hide.bs.modal','#modal', function () {
 
 });
 
+$(document).on('submit','#modal', function () {
+                
+  $('#modal').modal('hide');
+
+});
+
 
 
 

@@ -154,6 +154,39 @@ CREATE TABLE schema_migrations (
 
 
 --
+-- Name: suggestions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE suggestions (
+    id integer NOT NULL,
+    subject character varying,
+    body character varying,
+    user_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: suggestions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE suggestions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: suggestions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE suggestions_id_seq OWNED BY suggestions.id;
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -328,6 +361,13 @@ ALTER TABLE ONLY reps ALTER COLUMN id SET DEFAULT nextval('reps_id_seq'::regclas
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY suggestions ALTER COLUMN id SET DEFAULT nextval('suggestions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
@@ -374,6 +414,14 @@ ALTER TABLE ONLY pictures
 
 ALTER TABLE ONLY reps
     ADD CONSTRAINT reps_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: suggestions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY suggestions
+    ADD CONSTRAINT suggestions_pkey PRIMARY KEY (id);
 
 
 --
@@ -441,6 +489,13 @@ CREATE INDEX index_pictures_on_workout_id ON pictures USING btree (workout_id);
 --
 
 CREATE INDEX index_reps_on_xset_id ON reps USING btree (xset_id);
+
+
+--
+-- Name: index_suggestions_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_suggestions_on_user_id ON suggestions USING btree (user_id);
 
 
 --
@@ -548,6 +603,14 @@ ALTER TABLE ONLY pictures
 
 
 --
+-- Name: fk_rails_c08cf651b8; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY suggestions
+    ADD CONSTRAINT fk_rails_c08cf651b8 FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -618,4 +681,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160218165819');
 INSERT INTO schema_migrations (version) VALUES ('20160219214947');
 
 INSERT INTO schema_migrations (version) VALUES ('20160225081609');
+
+INSERT INTO schema_migrations (version) VALUES ('20160311064001');
 

@@ -39,9 +39,10 @@ class WorkoutsController < ApplicationController
 				end
 			end
 
-			if @saved = true 
+			if @saved == true 
 				@workouts = Workout.paginate(page: params[:page], per_page: 1).order(created_at: :desc)
 				respond_to do |format|
+					flash.now[:success] = "Workout for #{@workout.date.strftime('%D')} added."
 					format.js { render file: "/app/views/users/workouts/add_workout.js.erb" }
 				end
 			else
@@ -97,10 +98,12 @@ class WorkoutsController < ApplicationController
 				end
 			end
 
-			if @saved = true 
-				@workouts = Workout.paginate(page: params[:page], per_page: 3).order(created_at: :desc)
+			if @saved == true 
+				#@workouts = Workout.paginate(page: params[:page], per_page: 3).order(created_at: :desc)
 				respond_to do |format|
-					format.js { render file: "/app/views/users/workouts/add_workout.js.erb" }
+					flash.now[:success] = "Workout for #{@workout.date.strftime('%D')} updated."
+					format.js { render file: "/app/views/users/workouts/update_workout.js.erb" }
+					
 				end
 			else
 				flash.now[:error] = "Error."	
@@ -109,9 +112,13 @@ class WorkoutsController < ApplicationController
 				end
 			end
 		else
-			@workouts = Workout.paginate(page: params[:page], per_page: 3).order(created_at: :desc)
+			#@workouts = Workout.paginate(page: params[:page], per_page: 3).order(created_at: :desc)
+			@workout = Workout.find(params[:workout_id])
 			respond_to do |format|
+					flash.now[:success] = "Workout for #{@workout.date.strftime('%D')} updated."
 					format.js { render file: "/app/views/users/workouts/update_workout.js.erb" }
+					
+        	
 			end
 		end 
 

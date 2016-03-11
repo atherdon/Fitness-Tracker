@@ -7,3 +7,4 @@ $("#workouts").children('.session:last-child').remove();
 $('#workouts').prepend('<%= j render partial: 'users/workouts/workout', collection: @workouts, as: :workout %>');
 $('#workout-form').hide();
 $('.add-workout').show();
+<%= render file: "/app/views/layouts/notice.js.erb" %>

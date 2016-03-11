@@ -1,2 +1,9 @@
-$('.feed').html("<%= escape_javascript(render partial: 'users/workouts/feed', collection: @user.workouts.build ) %>");
+
+$('#modal').modal('hide');
+
+$("#workouts").prepend('<%= j render partial: 'users/workouts/workout', collection: @workouts, as: :workout %>');
+
+
+
+<%= render file: "/app/views/layouts/notice.js.erb" %>
 

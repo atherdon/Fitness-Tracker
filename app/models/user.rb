@@ -7,9 +7,10 @@ class User < ActiveRecord::Base
   validate :validate_username
   #serialize :preferences, UserPreferences
   store_accessor :preferences
-  has_one :transformation
-  has_many :pictures
-  has_many :workouts
+  has_one :transformation, dependent: :destroy
+  has_many :pictures, dependent: :destroy
+  has_many :workouts, dependent: :destroy
+  has_many :suggestions, dependent: :destroy
 
 
   def to_param

@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   post '/:username/add_workout' => 'workouts#workout', as: :add_workout
   post '/:username/update_workout' => 'workouts#update_workout', as: :update_workout
 
+  post '/:username/add_suggestion' => 'suggestions#add_suggestion', as: :add_suggestion
 
   root 'users#index'
 
