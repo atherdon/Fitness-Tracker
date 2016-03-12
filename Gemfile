@@ -61,6 +61,7 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
 gem 'browser-timezone-rails'
 gem 'will_paginate', '~> 3.0.6'
 gem 'fotoramajs'
+gem 'unicorn'
 
 
 group :development, :test do
