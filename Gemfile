@@ -62,6 +62,7 @@ gem 'browser-timezone-rails'
 gem 'will_paginate', '~> 3.0.6'
 gem 'fotoramajs'
 gem 'unicorn'
+gem 'sendgrid-ruby'
 
 
 group :development, :test do
