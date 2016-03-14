@@ -1,6 +1,15 @@
 class WorkoutsController < ApplicationController
 	before_action :check_user, only: [:workout, :update_workout]
 
+	def show
+		@user = User.find_by_username(params[:username])
+		@picture = Picture.new
+		@workout = Workout.find(params[:id])
+		respond_to do |format|
+			format.html { render file: "/app/views/users/workouts/show.html.erb" }
+		end
+	end
+
 	def workout
 		@user = current_user
 		exercises = params[:exercises]

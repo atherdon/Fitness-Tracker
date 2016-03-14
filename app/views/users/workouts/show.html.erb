@@ -1,20 +1,25 @@
+<%= render 'users/profile_images/transformation' %>
+
+<div class="container light-background">
+<div class="feed row row-centered">
+
 <div class="session">
-<div class="<%= workout.id %>">
+<div class="<%= @workout.id %>">
 	<div class="workouts">
 	<div class="col-md-10 col-md-offset-1">
 	<hr>
 
 	<% if current_user %>
-			<span class="glyphicon glyphicon glyphicon-edit" id="edit-workout" style="cursor:pointer" data-toggle="modal" data-target=".edit-workout-modal-<%= workout.id %>" ></span>
+			<span class="glyphicon glyphicon glyphicon-edit" id="edit-workout" style="cursor:pointer" data-toggle="modal" data-target=".edit-workout-modal-<%= @workout.id %>" ></span>
 
 
 	<% end %>
 
-	<% if workout.pictures.exists? %>
+	<% if @workout.pictures.exists? %>
 		<div class="col-md-6">
 			<div class="fotorama" data-nav="thumbs" data-allowfullscreen="true" data-maxheight="100%" data-minheight="600" data-width="100%" >
 
-			<% workout.pictures.each do |pic| %>
+			<% @workout.pictures.each do |pic| %>
 
 			<%= image_tag pic.attachment.url(:index) %>
 
@@ -30,7 +35,7 @@
 
 
 		<% @row_index = 0 %>
-		<% workout.exercises.each_with_index do |ex, index| %>
+		<% @workout.exercises.each_with_index do |ex, index| %>
 		
 			<div class="col-md-2">
 			<div class="panel panel-default">
@@ -59,7 +64,7 @@
 	</div>
 	<div class="col-md-12">
 		<br>
-		<h4><small><%= link_to workout.date.to_datetime.strftime("%d %b %Y"), show_workout_path(id: workout.id), target: "_blank" %></small></h4>
+		<h4><small><%= @workout.date.to_datetime.strftime("%d %b %Y") %></small></h4>
 	</div>
 	</div>
 
@@ -140,7 +145,7 @@
 </div>
 
 <% if current_user %>
-<div class="modal fade edit-workout-modal-<%= workout.id %>" id="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+<div class="modal fade edit-workout-modal-<%= @workout.id %>" id="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
   <div class="modal-dialog edit-workout-dialog modal-lg">
     <div class="modal-content">
     	<%= form_for @picture, url: update_workout_path, method: :post, :authenticity_token => true, html: { multipart: true }, remote: true do |f| %>
@@ -155,7 +160,7 @@
           <div class=" ">  
           <div class="edit-workout-pics">
 
-          		<%= render partial: 'users/workouts/edit_session_pics', :locals => {workout: workout} %>
+          		<%= render partial: 'users/workouts/edit_session_pics', :locals => {workout: @workout} %>
             	
 					
 
@@ -208,7 +213,7 @@
             <br>
             <hr>
             <div class="weight_fields_wrap">
-	              <% workout.exercises.each_with_index do |ex, index| %>
+	              <% @workout.exercises.each_with_index do |ex, index| %>
 	              <div class="<%= ex.name %> ex-group">
 								&nbsp;&nbsp;&nbsp;&thinsp;&thinsp;&thinsp;&thinsp;
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -243,7 +248,7 @@
           <div class='col-md-12 '>
             <div class="form-group">
                 <div class='input-group date' id='datetimepicker2'>
-                    <input type='text' class="form-control" disabled="disabled" name="date" value="<%= workout.date.strftime('%D') %>"/>
+                    <input type='text' class="form-control" disabled="disabled" name="date" value="<%= @workout.date.strftime('%D') %>"/>
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -259,7 +264,7 @@
           </div>
 
           <div class='col-md-12 edit-submit'>
-          	<%= hidden_field_tag :workout_id, workout.id %>
+          	<%= hidden_field_tag :workout_id, @workout.id %>
 	          <%= f.button "Update Session", class: "btn btn-primary", name: "commit", value: "conceal", data: { disable_with: "Please wait..." } %>
 	          <% end %>
           </div>
@@ -277,3 +282,7 @@
 </div>
 
 
+
+
+</div>
+</div>

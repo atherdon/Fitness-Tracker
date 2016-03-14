@@ -12,6 +12,29 @@ $gray-medium-light: #eaeaea;
   -webkit-font-smoothing: antialiased;
 }
 
+
+
+/* typography */
+
+h1 {
+  line-height: 1;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+}
+
+ h2, h3, h4, h5, h6, p {
+  line-height: 1;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+
+
+
+
+
+
+
+
+
 /* universal */
 
 h3, .h3 {

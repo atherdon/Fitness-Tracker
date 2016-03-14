@@ -27,6 +27,8 @@ Rails.application.routes.draw do
 
   post '/:username/add_suggestion' => 'suggestions#add_suggestion', as: :add_suggestion
 
+  get '/:username/workout/:id' => 'workouts#show', as: :show_workout
+
   root 'users#index'
 
 

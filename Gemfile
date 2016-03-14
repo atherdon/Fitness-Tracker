@@ -63,6 +63,8 @@ gem 'will_paginate', '~> 3.0.6'
 gem 'fotoramajs'
 gem 'unicorn'
 gem 'sendgrid-ruby'
+gem 'rails_admin'
+gem 'make_flaggable', :git => 'git://github.com/medihack/make_flaggable.git'
 
 
 group :development, :test do

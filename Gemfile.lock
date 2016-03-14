@@ -8,6 +8,13 @@ GIT
       json (>= 1.7)
       mime-types (>= 1.16)
 
+GIT
+  remote: git://github.com/medihack/make_flaggable.git
+  revision: 99297edddfec3ed2fadc90808d3033c68c58d772
+  specs:
+    make_flaggable (0.0.3)
+      activerecord (>= 3.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -133,6 +140,8 @@ GEM
     fog-softlayer (1.0.2)
       fog-core
       fog-json
+    font-awesome-rails (4.5.0.1)
+      railties (>= 3.2, < 5.1)
     formatador (0.2.5)
     fotoramajs (4.6.4)
       sprockets (>= 2)
@@ -143,6 +152,8 @@ GEM
       json
       multi_json
       request_store (>= 1.0)
+    haml (4.0.7)
+      tilt
     hashie (3.4.3)
     i18n (0.7.0)
     ice_nine (0.11.1)
@@ -163,7 +174,12 @@ GEM
     jquery-turbolinks (2.1.0)
       railties (>= 3.1.0)
       turbolinks
+    jquery-ui-rails (5.0.5)
+      railties (>= 3.2.16)
     json (1.8.3)
+    kaminari (0.16.3)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     kgio (2.10.0)
     less (2.6.0)
       commonjs (~> 0.2.7)
@@ -185,6 +201,7 @@ GEM
       railties (>= 3.1)
     multi_json (1.11.2)
     multipart-post (2.0.0)
+    nested_form (0.3.2)
     net-ssh (3.0.1)
     nokogiri (1.6.7)
       mini_portile2 (~> 2.0.0.rc2)
@@ -192,6 +209,9 @@ GEM
     pg (0.18.4)
     power_assert (0.2.6)
     rack (1.6.4)
+    rack-pjax (0.8.0)
+      nokogiri (~> 1.5)
+      rack (~> 1.1)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.0)
@@ -216,6 +236,20 @@ GEM
     rails_12factor (0.0.2)
       rails_serve_static_assets
       rails_stdout_logging
+    rails_admin (0.8.1)
+      builder (~> 3.1)
+      coffee-rails (~> 4.0)
+      font-awesome-rails (>= 3.0, < 5)
+      haml (~> 4.0)
+      jquery-rails (>= 3.0, < 5)
+      jquery-ui-rails (~> 5.0)
+      kaminari (~> 0.14)
+      nested_form (~> 0.3)
+      rack-pjax (~> 0.7)
+      rails (~> 4.0)
+      remotipart (~> 1.0)
+      safe_yaml (~> 1.0)
+      sass-rails (>= 4.0, < 6)
     rails_serve_static_assets (0.0.4)
     rails_stdout_logging (0.0.4)
     railties (4.2.0)
@@ -236,6 +270,7 @@ GEM
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
     rmagick (2.15.4)
+    safe_yaml (1.0.4)
     sass (3.4.19)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
@@ -332,11 +367,13 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   less-rails
+  make_flaggable!
   momentjs-rails (>= 2.9.0)
   net-ssh
   pg
   rails (= 4.2.0)
   rails_12factor
+  rails_admin
   randumb
   remotipart (~> 1.2)
   rmagick
