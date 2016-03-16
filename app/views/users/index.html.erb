@@ -2,13 +2,14 @@
 <% if user_signed_in? %>
 
 <% else %>
-	<div class="jumbotron">
+	<div class="jumbotron index-page">
 	<div class="container">
 
-	<div class="col-md-12 col-md-offset-3">
+	<div class="col-md-10 col-md-offset-4">
 	<div class="index-text">
 	<p>Begin Your Journey</p>
 	</div>
+	<br>
 	</div>
 
 	<div class="col-md-6 ">
@@ -18,20 +19,19 @@
 
 	<div class="col-md-6">
 	<div class="thumbnail">
-	<%= link_to image_tag("zyzz-before.png") %>
+	<%= image_tag("zyzz-before.png") %>
 	</div>
 	<div class="thumbnail">
-	<%= link_to image_tag("zyzz-after.png") %>
+	<%= image_tag("zyzz-after.png") %>
 	</div>
-	<br><br>
-	</div>
-
-
 	</div>
 
 
+	</div>
 
-	<div class="col-md-2 col-md-offset-4">
+
+
+	<div class="col-md-2 col-md-offset-4 sign-in-up">
 	<div class="col-md-12 light-background">
 	<br>
 	<%= form_for(:user, :url => session_path(:user)) do |f| %>

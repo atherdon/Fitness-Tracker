@@ -8,12 +8,18 @@
 		<h2>
 		<%= @user.username %>&nbsp;
 		
-		<% if not current_user %>
-		<span class="btn btn-default">Follow</span>		
+		<% if user_signed_in? %>
+			<% if not current_user %>
+				<span class="btn btn-default">Follow</span>		
+		
+				<span class="glyphicon glyphicon-option-horizontal margin" style="cursor:pointer" data-toggle="modal" data-target=".user-modal"></span>	
+			<% end %>
+		<% else %> 
+			<%= link_to "Follow", new_user_session_path, class: "btn btn-default" %>
 		<% end %>
-		<span class="glyphicon glyphicon-option-horizontal margin" style="cursor:pointer" data-toggle="modal" data-target=".user-modal"></span>		
-	
-		</h2>
+
+		
+	</h2>
 	</div>
 
 	<div class="col-md-6 col-md-offset-4">
@@ -43,7 +49,7 @@
 
 </div>
 
-
+<% if user_signed_in? %>
 <div class="modal fade user-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
@@ -68,6 +74,7 @@
     </div>
   </div>
 </div>
+<% end %>
 
 
 
