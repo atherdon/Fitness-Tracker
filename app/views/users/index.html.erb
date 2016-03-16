@@ -3,24 +3,36 @@
 
 <% else %>
 	<div class="jumbotron">
-	<div class="container">
-	<div class="col-md-8 col-md-offset-1">
+	<div class="container-fluid">
 
-	<div class="col-md-8 col-md-offset-1">
+	<div class="col-md-12 col-md-offset-4">
+	<div class="index-text">
+	<p>Begin Your Journey</p>
+	</div>
+	</div>
 
-	<h2>Private Beta announcement:</h2>
+	<div class="col-md-6 ">
 
-	<h2><small>Slots left: <%= 200 - User.count %></small></h2>
+
+	
 
 	<div class="col-md-6 col-md-offset-5">
-	<br><br><br><br>
-	<%= link_to image_tag("milo.png") %>
+	<div class="thumbnail">
+	<%= link_to image_tag("zyzz-before.png") %>
+	</div>
+	<div class="thumbnail">
+	<%= link_to image_tag("zyzz-after.png") %>
+	</div>
+	<br><br>
 	</div>
 
-	</div>
+
 	</div>
 
-	<div class="col-md-3">
+
+
+	<div class="col-md-2 col-md-offset-2">
+	<div class="col-md-12 light-background">
 	<br>
 	<%= form_for(:user, :url => session_path(:user)) do |f| %>
 	  <%= f.text_field :login, placeholder: "Username / Email", class: "form-control" %>
@@ -33,7 +45,7 @@
 	<hr>
 	</div>
 
-	<div class="col-md-3">
+	<div class="col-md-12 light-background">
 	<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 	  <%= devise_error_messages! %>
 
@@ -60,9 +72,12 @@
 	  	<br>
 	    <%= f.submit "Sign up", class: "btn btn-success form-control" %>
 	  </div>
+	  <br>
 	<% end %>
 
 	</div>
+	</div>
+
 
 	</div>
 	</div>

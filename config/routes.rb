@@ -29,6 +29,10 @@ Rails.application.routes.draw do
 
   get '/:username/workout/:id' => 'workouts#show', as: :show_workout
 
+  post '/:username/flag_user' => 'users#flag_user', as: :flag_user 
+
+  post '/:username/block_user' => 'users#block_user', as: :block_user 
+
   root 'users#index'
 
 

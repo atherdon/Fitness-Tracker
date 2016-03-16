@@ -11,7 +11,7 @@
 		<% if not current_user %>
 		<span class="btn btn-default">Follow</span>		
 		<% end %>
-		<span class="glyphicon glyphicon-option-horizontal margin" style="cursor:pointer" data-toggle="modal" data-target=".bs-example-modal-sm"></span>		
+		<span class="glyphicon glyphicon-option-horizontal margin" style="cursor:pointer" data-toggle="modal" data-target=".user-modal"></span>		
 	
 		</h2>
 	</div>
@@ -44,18 +44,22 @@
 </div>
 
 
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+<div class="modal fade user-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
 
+    	<%= form_tag flag_user_path(current_user),  method: :post, :authenticity_token => true, remote: true do %>
 
-     		<button type="button" class="btn btn-default btn-lg col-md-12">
-  				<span class="glyphicon glyphicon-flag" aria-hidden="true" selected></span> Report Inapproriate Image
-				</button>
+				<%= button_tag "Submit", class: "btn btn-default btn-lg col-md-12" do %>
+					<span class="glyphicon glyphicon-flag" aria-hidden="true" selected></span> Report Inapproriate Image
+				<% end %>
+			<% end %>
 
+			<%= form_tag block_user_path(current_user),  method: :post, :authenticity_token => true, remote: true do %>
 				<button type="button" class="btn btn-default btn-lg col-md-12">
   				<div style="color:Red;">Block User</div>
 				</button>
+			<% end %>
 
 				<div class="col-md-12" style="background-color:White;"><br><br></div>
 

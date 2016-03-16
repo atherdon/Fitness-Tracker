@@ -12,6 +12,12 @@ class User < ActiveRecord::Base
   has_many :workouts, dependent: :destroy
   has_many :suggestions, dependent: :destroy
 
+  make_flaggable
+  make_flagger :flag_once => true
+
+  acts_as_followable
+  acts_as_follower
+
 
   def to_param
   	username

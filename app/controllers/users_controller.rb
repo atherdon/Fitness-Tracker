@@ -105,7 +105,14 @@ class UsersController < ApplicationController
 
   end
 
-
+  def flag_user
+    @user = User.find_by_username(params[:username])
+    current_user.flag(@user, "Inappropriate image")
+    respond_to do |format|
+      flash.now[:info] = "User flagged."
+      format.js { render file: "/app/views/users/add_flag.js.erb" }
+    end
+  end
 
 
 
@@ -118,3 +125,13 @@ class UsersController < ApplicationController
   	params.require(:picture).permit(:image, :item_id)
   end
 end
+
+
+
+
+
+
+
+
+
+

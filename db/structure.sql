@@ -76,6 +76,76 @@ ALTER SEQUENCE exercises_id_seq OWNED BY exercises.id;
 
 
 --
+-- Name: flaggings; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE flaggings (
+    id integer NOT NULL,
+    flaggable_type character varying,
+    flaggable_id integer,
+    flagger_type character varying,
+    flagger_id integer,
+    reason text,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: flaggings_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE flaggings_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: flaggings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE flaggings_id_seq OWNED BY flaggings.id;
+
+
+--
+-- Name: follows; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE follows (
+    id integer NOT NULL,
+    followable_id integer NOT NULL,
+    followable_type character varying NOT NULL,
+    follower_id integer NOT NULL,
+    follower_type character varying NOT NULL,
+    blocked boolean DEFAULT false NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: follows_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE follows_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: follows_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE follows_id_seq OWNED BY follows.id;
+
+
+--
 -- Name: pictures; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -210,7 +280,8 @@ CREATE TABLE users (
     after integer,
     stats_before hstore,
     stats_after hstore,
-    weight_type character varying
+    weight_type character varying,
+    flaggings_count integer
 );
 
 
@@ -281,7 +352,8 @@ CREATE TABLE workouts (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     volume character varying,
-    date date
+    date date,
+    flaggings_count integer
 );
 
 
@@ -347,6 +419,20 @@ ALTER TABLE ONLY exercises ALTER COLUMN id SET DEFAULT nextval('exercises_id_seq
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY flaggings ALTER COLUMN id SET DEFAULT nextval('flaggings_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY follows ALTER COLUMN id SET DEFAULT nextval('follows_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY pictures ALTER COLUMN id SET DEFAULT nextval('pictures_id_seq'::regclass);
 
 
@@ -398,6 +484,22 @@ ALTER TABLE ONLY xsets ALTER COLUMN id SET DEFAULT nextval('xsets_id_seq'::regcl
 
 ALTER TABLE ONLY exercises
     ADD CONSTRAINT exercises_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: flaggings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY flaggings
+    ADD CONSTRAINT flaggings_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: follows_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY follows
+    ADD CONSTRAINT follows_pkey PRIMARY KEY (id);
 
 
 --
@@ -457,10 +559,38 @@ ALTER TABLE ONLY xsets
 
 
 --
+-- Name: access_flaggings; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX access_flaggings ON flaggings USING btree (flagger_type, flagger_id, flaggable_type, flaggable_id);
+
+
+--
+-- Name: fk_followables; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX fk_followables ON follows USING btree (followable_id, followable_type);
+
+
+--
+-- Name: fk_follows; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX fk_follows ON follows USING btree (follower_id, follower_type);
+
+
+--
 -- Name: index_exercises_on_workout_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_exercises_on_workout_id ON exercises USING btree (workout_id);
+
+
+--
+-- Name: index_flaggings_on_flaggable_type_and_flaggable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_flaggings_on_flaggable_type_and_flaggable_id ON flaggings USING btree (flaggable_type, flaggable_id);
 
 
 --
@@ -683,4 +813,12 @@ INSERT INTO schema_migrations (version) VALUES ('20160219214947');
 INSERT INTO schema_migrations (version) VALUES ('20160225081609');
 
 INSERT INTO schema_migrations (version) VALUES ('20160311064001');
+
+INSERT INTO schema_migrations (version) VALUES ('20160314234929');
+
+INSERT INTO schema_migrations (version) VALUES ('20160315051235');
+
+INSERT INTO schema_migrations (version) VALUES ('20160315170750');
+
+INSERT INTO schema_migrations (version) VALUES ('20160315222635');
 
