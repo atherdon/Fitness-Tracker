@@ -3,9 +3,9 @@
 
 <% else %>
 	<div class="jumbotron">
-	<div class="container-fluid">
+	<div class="container">
 
-	<div class="col-md-12 col-md-offset-4">
+	<div class="col-md-12 col-md-offset-3">
 	<div class="index-text">
 	<p>Begin Your Journey</p>
 	</div>
@@ -16,7 +16,7 @@
 
 	
 
-	<div class="col-md-6 col-md-offset-5">
+	<div class="col-md-6">
 	<div class="thumbnail">
 	<%= link_to image_tag("zyzz-before.png") %>
 	</div>
@@ -31,7 +31,7 @@
 
 
 
-	<div class="col-md-2 col-md-offset-2">
+	<div class="col-md-2 col-md-offset-4">
 	<div class="col-md-12 light-background">
 	<br>
 	<%= form_for(:user, :url => session_path(:user)) do |f| %>
