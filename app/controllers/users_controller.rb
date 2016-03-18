@@ -114,6 +114,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def feed
+    @user = current_user
+    feed = StreamRails.feed_manager.get_user_feed(@user.id)
+  end
 
 
 

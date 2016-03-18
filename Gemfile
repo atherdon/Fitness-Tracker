@@ -66,6 +66,7 @@ gem 'sendgrid-ruby'
 gem 'rails_admin'
 gem 'make_flaggable', :git => 'git://github.com/medihack/make_flaggable.git'
 gem "acts_as_follower"
+gem 'stream_rails'
 
 
 group :development, :test do
