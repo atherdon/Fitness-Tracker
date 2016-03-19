@@ -11,7 +11,7 @@ class Follow < ActiveRecord::Base
   as_activity
 
   def activity_notify
-    [StreamRails.feed_manager.get_notification_feed(self.followable_id)]
+    [StreamRails.feed_manager.get_notification_feed(self.parent.follower)]
   end
 
   def activity_object

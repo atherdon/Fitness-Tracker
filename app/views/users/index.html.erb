@@ -1,11 +1,19 @@
 
 <% if user_signed_in? %>
 
-<div class="col-md-12 jumbotron">
-<div class="col-md-8 col-md-offset-3 index-text">
-	<p>Feed coming soon</p>
-	<br>
-	</div>
+<div class="col-md-12">
+<div class="col-md-8 col-md-offset-3">
+Activity:
+		<% for activity in @activities %>
+        <%= render_activity activity, partial: "workouts/workout", :partial_root => "users" %>
+    <% end %>
+
+<br><br>
+Notification:
+
+<%= @notification_feed %>
+
+</div>
 </div>
 
 <% else %>

@@ -8,12 +8,17 @@
 		<h2>
 		<%= @user.username %>&nbsp;
 		
-		<% if user_signed_in? %>
-			<% if not current_user %>
-				<span class="btn btn-default">Follow</span>		
+		<% if current_user %>
+
+				<%= form_tag follow_user_path(current_user),  method: :post, :authenticity_token => true, remote: true do %>
+					<%= hidden_field_tag 'following_id', @user.id %>
+					<%= button_tag "Submit", class: "btn btn-default" %>
+				<% end %>		
 		
 				<span class="glyphicon glyphicon-option-horizontal margin" style="cursor:pointer" data-toggle="modal" data-target=".user-modal"></span>	
-			<% end %>
+
+				
+
 		<% else %> 
 			<%= link_to "Follow", new_user_session_path, class: "btn btn-default" %>
 		<% end %>

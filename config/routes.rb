@@ -41,6 +41,8 @@ Rails.application.routes.draw do
 
   post '/:username/block_user' => 'users#block_user', as: :block_user 
 
+  post '/:username/follow_user' => 'users#follow_user', as: :follow_user
+
   root 'users#index'
 
 

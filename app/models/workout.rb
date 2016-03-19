@@ -15,6 +15,6 @@ class Workout < ActiveRecord::Base
   end
 
   def activity_object
-    self.item
+    self.id
   end
 end

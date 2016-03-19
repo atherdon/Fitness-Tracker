@@ -1,6 +1,12 @@
 class UsersController < ApplicationController
+  before_action :create_enricher
+
   def index
   	@users = User.all
+    feed = StreamRails.feed_manager.get_news_feeds(current_user.id)[:aggregated]
+    results = feed.get()['results']
+    @activities = @enricher.enrich_aggregated_activities(results)
+    @notification_feed = StreamRails.feed_manager.get_notification_feed(current_user.id)
   end
 
   def show
@@ -116,11 +122,27 @@ class UsersController < ApplicationController
 
   def feed
     @user = current_user
-    feed = StreamRails.feed_manager.get_user_feed(@user.id)
+    aggregated_feed = StreamRails.feed_manager.get_news_feeds(@user.id)[:aggregated]
+  end
+
+  def follow_user
+    @follower = User.find_by_username(params[:username])
+    @following = User.find(params[:following_id])
+    @follower.follow(@following)
+    
+    StreamRails.feed_manager.follow_user(@follower.id, @following.id)
   end
 
 
 
+
+
+
+
+
+  def create_enricher
+    @enricher = StreamRails::Enrich.new
+  end
 
 
   private
