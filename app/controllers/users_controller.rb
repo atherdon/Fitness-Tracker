@@ -3,10 +3,13 @@ class UsersController < ApplicationController
 
   def index
   	@users = User.all
-    feed = StreamRails.feed_manager.get_news_feeds(current_user.id)[:aggregated]
-    results = feed.get()['results']
-    @activities = @enricher.enrich_aggregated_activities(results)
-    @notification_feed = StreamRails.feed_manager.get_notification_feed(current_user.id)
+
+    if user_signed_in?
+      feed = StreamRails.feed_manager.get_news_feeds(current_user.id)[:aggregated]
+      results = feed.get()['results']
+      @activities = @enricher.enrich_aggregated_activities(results)
+      @notification_feed = StreamRails.feed_manager.get_notification_feed(current_user.id)
+    end
   end
 
   def show
