@@ -281,7 +281,8 @@ CREATE TABLE users (
     stats_before hstore,
     stats_after hstore,
     weight_type character varying,
-    flaggings_count integer
+    flaggings_count integer,
+    admin boolean
 );
 
 
@@ -821,4 +822,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160315051235');
 INSERT INTO schema_migrations (version) VALUES ('20160315170750');
 
 INSERT INTO schema_migrations (version) VALUES ('20160315222635');
+
+INSERT INTO schema_migrations (version) VALUES ('20160321204833');
 

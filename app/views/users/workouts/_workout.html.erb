@@ -3,6 +3,7 @@
 	<div class="workouts">
 	<div class="col-md-10 col-md-offset-1">
 	<hr>
+<% user = User.find(workout.user_id) %>
 
 	<% if current_user %>
 		<% if user == current_user %>
@@ -60,7 +61,7 @@
 	</div>
 	<div class="col-md-12">
 		<br>
-		<% user = User.find(workout.user_id) %>
+		
 		<h4><small><%= link_to workout.date.to_datetime.strftime("%d %b %Y"), show_workout_path(id: workout.id, username: user ), target: "_blank" %></small></h4>
 	</div>
 	</div>
