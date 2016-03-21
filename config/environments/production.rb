@@ -79,7 +79,7 @@ Rails.application.configure do
 
   config.logger = Logger.new(STDOUT)
 
-  config.action_mailer.default_url_options = { :host => 'your.websitedomain.com' }
+  config.action_mailer.default_url_options = { :host => 'www.milonos.com' }
   ActionMailer::Base.smtp_settings = {
   :address        => "smtp.sendgrid.net",
   :port           => "25",
