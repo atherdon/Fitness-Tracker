@@ -5,8 +5,9 @@
 	<hr>
 
 	<% if current_user %>
+		<% if user == current_user %>
 			<span class="glyphicon glyphicon glyphicon-edit" id="edit-workout" style="cursor:pointer" data-toggle="modal" data-target=".edit-workout-modal-<%= workout.id %>" ></span>
-
+		<% end %>
 
 	<% end %>
 
@@ -59,7 +60,8 @@
 	</div>
 	<div class="col-md-12">
 		<br>
-		<h4><small><%= link_to workout.date.to_datetime.strftime("%d %b %Y"), show_workout_path(id: workout.id), target: "_blank" %></small></h4>
+		<% user = User.find(workout.user_id) %>
+		<h4><small><%= link_to workout.date.to_datetime.strftime("%d %b %Y"), show_workout_path(id: workout.id, username: user ), target: "_blank" %></small></h4>
 	</div>
 	</div>
 
@@ -68,7 +70,7 @@
 
 
 
-
+<% if user == current_user %>
 	<!-- EDIT WORKOUT -->
 	<div class="col-md-10 col-md-offset-1 edit-workout">
 		<div style="display:none;" id="edit-workout-form">
@@ -273,6 +275,7 @@
     </div>
   </div>
 </div>
+<% end %>
 <% end %>
 </div>
 

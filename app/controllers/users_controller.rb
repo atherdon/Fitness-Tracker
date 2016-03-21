@@ -2,8 +2,6 @@ class UsersController < ApplicationController
   before_action :create_enricher
 
   def index
-  	@users = User.all
-
     if user_signed_in?
       feed = StreamRails.feed_manager.get_news_feeds(current_user.id)[:aggregated]
       results = feed.get()['results']

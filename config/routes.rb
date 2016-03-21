@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   constraints subdomain: 'www' do
   get ':any', to: redirect(subdomain: nil, path: '/%{any}'), any: /.*/
   end

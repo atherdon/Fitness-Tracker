@@ -7,7 +7,6 @@ class User < ActiveRecord::Base
   validate :validate_username
   #serialize :preferences, UserPreferences
   store_accessor :preferences
-  has_one :transformation, dependent: :destroy
   has_many :pictures, dependent: :destroy
   has_many :workouts, dependent: :destroy
   has_many :suggestions, dependent: :destroy
