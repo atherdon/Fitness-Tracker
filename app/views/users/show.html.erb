@@ -12,7 +12,7 @@
 
 				<%= form_tag follow_user_path(current_user),  method: :post, :authenticity_token => true, remote: true do %>
 					<%= hidden_field_tag 'following_id', @user.id %>
-					<%= button_tag "Submit", class: "btn btn-default" %>
+					<%= button_tag "Follow", class: "btn btn-default" %>
 				<% end %>		
 		
 				<span class="glyphicon glyphicon-option-horizontal margin" style="cursor:pointer" data-toggle="modal" data-target=".user-modal"></span>	
@@ -33,9 +33,9 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<b><%= @user.workouts.count %></b> sessions
 			&nbsp;
-			<b>0</b> followers
+			<b><%= @user.followers_count %></b> followers
 			&nbsp;
-			<b>0</b> following
+			<b><%= @user.all_following.count %></b> following 
 			</small></h3>
 		</div>
 	</div>

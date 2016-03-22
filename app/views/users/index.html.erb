@@ -1,21 +1,49 @@
 
 <% if user_signed_in? %>
+<div class="container">
 
-<div class="col-md-12">
-<div class="col-md-8 col-md-offset-3">
-Activity:
+
+<div class="row-centered">
+
+<%= link_to current_user, target: "_blank" do %>
+	<div class="col-md-2 nopadding">
+	<hr>
+
+	<div class="col-md-6 nopadding">
+	<%= image_tag Picture.where(id: current_user.before).first.attachment.url(:edit) %>
+	</div>
+	<div class="col-md-6 nopadding">
+	<%= image_tag Picture.where(id: current_user.after).first.attachment.url(:edit) %>
+	</div>
+	<div class="col-md-12 nopadding">
+	<br>
+	<p><%= current_user.username %></p>
+	</div>
+
+	</div>
+<% end %>
+
+</div>
+
+
+
+<div class="col-md-10">
+
+
 		<% for activity in @activities %>
 				<% wrk = Workout.find(activity["activities"][0]["object"]) %>
         <%= render_activity activity, partial: "workouts/workout", partial_root: "users", locals: { workout: wrk }  %>
     <% end %>
 
-<br><br>
-Notification:
-
-<%= @notification_feed %>
+    
 
 </div>
+
+
+
 </div>
+
+
 
 <% else %>
 	<div class="jumbotron index-page">
