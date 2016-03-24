@@ -1,0 +1,10 @@
+
+
+$('.activity-feed').append('<%= j render partial: 'users/feed', collection: @enricher.enrich_aggregated_activities(results), as: :activity %>');
+<% if @workouts.next_page %>
+  $('.pagination').replaceWith('<%= j will_paginate @enricher.enrich_aggregated_activities(results) %>');
+<% else %>
+  $(window).off('scroll');
+  //$('.pagination').remove();
+<% end %>
+

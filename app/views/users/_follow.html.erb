@@ -1,0 +1,26 @@
+
+
+<% if user_signed_in? %>
+
+	<% if @user != current_user %>
+
+		<% if current_user.following?(@user) %>
+			<%= form_tag unfollow_user_path(current_user),  method: :post, :authenticity_token => true, remote: true do %>
+				<%= hidden_field_tag 'following_id', @user.id %>
+				<%= button_tag "Following", class: "btn btn-default follow-button", 'data-disable-with' => "<img src='/assets/ajax-loader.gif' alt='Loading...' />", style: "color:green; border-color: green;" %>
+			<% end %>	
+		<% else %>
+			<%= form_tag follow_user_path(current_user),  method: :post, :authenticity_token => true, remote: true do %>
+				<%= hidden_field_tag 'following_id', @user.id %>
+				<%= button_tag "Follow", class: "btn btn-default follow-button", 'data-disable-with' => "<img src='/assets/ajax-loader.gif' alt='Loading...' />" %>
+			<% end %>		
+		<% end %>
+	
+		<span class="glyphicon glyphicon-option-horizontal margin" style="cursor:pointer" data-toggle="modal" data-target=".user-modal"></span>	
+
+	<% end %>
+
+<% else %> 
+	<%= link_to "Follow", new_user_session_path, class: "btn btn-default" %>
+<% end %>
+

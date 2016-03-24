@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   post '/:username/block_user' => 'users#block_user', as: :block_user 
 
   post '/:username/follow_user' => 'users#follow_user', as: :follow_user
+  post '/:username/unfollow_user' => 'users#unfollow_user', as: :unfollow_user
 
   root 'users#index'
 

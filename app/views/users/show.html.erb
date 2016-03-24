@@ -4,28 +4,19 @@
 
 <div class="container light-background">
 
-	<div class="col-md-6 col-md-offset-5">
-		<h2>
-		<%= @user.username %>&nbsp;
-		
-		<% if current_user %>
+	<h2>
+	<div class="col-md-6 col-md-offset-5 ">
 
-				<%= form_tag follow_user_path(current_user),  method: :post, :authenticity_token => true, remote: true do %>
-					<%= hidden_field_tag 'following_id', @user.id %>
-					<%= button_tag "Follow", class: "btn btn-default" %>
-				<% end %>		
-		
-				<span class="glyphicon glyphicon-option-horizontal margin" style="cursor:pointer" data-toggle="modal" data-target=".user-modal"></span>	
+			
+			<%= @user.username %>&nbsp;
+			
 
-				
 
-		<% else %> 
-			<%= link_to "Follow", new_user_session_path, class: "btn btn-default" %>
-		<% end %>
-
-		
-	</h2>
+		<div class="follow follow-block">
+			<%= render partial: "users/follow" %>
+		</div>
 	</div>
+	</h2>
 
 	<div class="col-md-6 col-md-offset-4">
 		<div class="user-stats">

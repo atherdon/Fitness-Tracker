@@ -2,11 +2,16 @@ class UsersController < ApplicationController
   before_action :create_enricher
 
   def index
-    if user_signed_in?
+    if user_signed_in? && current_user.follow_count > 0
       feed = StreamRails.feed_manager.get_news_feeds(current_user.id)[:aggregated]
       results = feed.get()['results']
-      @activities = @enricher.enrich_aggregated_activities(results)
-      @notification_feed = StreamRails.feed_manager.get_notification_feed(current_user.id)
+      @activities = @enricher.enrich_aggregated_activities(results).paginate(:page => params[:page], :per_page => 1)
+      #@activities = @activities.paginate(:page => params[:page], :per_page => 1)
+      
+      respond_to do |format|
+        format.html
+        #format.js { render file: "/app/views/users/feed.js.erb" }
+      end
     end
   end
 
@@ -128,10 +133,38 @@ class UsersController < ApplicationController
 
   def follow_user
     @follower = User.find_by_username(params[:username])
+    @following = User.where(id: params[:following_id]).first
+    @user = @following
+
+    if @follower.follow(@following)
+      StreamRails.feed_manager.follow_user(@follower.id, @following.id)
+      respond_to do |format|
+        format.js { render file: "/app/views/users/follow.js.erb" }
+      end
+    else
+      respond_to do |format|
+        flash.now[:info] = "Error."
+        format.js { render file: "/app/views/users/add_flag.js.erb" }
+      end
+    end
+  end
+
+  def unfollow_user
+    @follower = User.find_by_username(params[:username])
     @following = User.find(params[:following_id])
-    @follower.follow(@following)
-    
-    StreamRails.feed_manager.follow_user(@follower.id, @following.id)
+    @user = @following
+
+    if @follower.stop_following(@following)  
+      StreamRails.feed_manager.unfollow_user(@follower.id, @following.id)
+      respond_to do |format|
+        format.js { render file: "/app/views/users/follow.js.erb" }
+      end
+    else
+      respond_to do |format|
+        flash.now[:info] = "Error."
+        format.js { render file: "/app/views/users/add_flag.js.erb" }
+      end
+    end
   end
 
 
