@@ -1,4 +1,4 @@
-<% if @activities.any? %>
+<% if @activities %>
 <% for activity in @activities %>
 	<% wrk = Workout.find(activity["activities"][0]["object"]) %>
   <%= render_activity activity, partial: "workouts/workout", partial_root: "users", locals: { workout: wrk }  %>
