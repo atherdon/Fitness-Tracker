@@ -34,9 +34,11 @@
 		<%= render partial: "feed" %>
 	</div>
 
+	<% if @activities %>
 	<div id="infinite-scrolling-activity-feed">
   	<%= will_paginate @activities %>
 	</div>
+	<% end %>
 </div>
 
 
