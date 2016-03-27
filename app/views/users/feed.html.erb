@@ -28,7 +28,6 @@
 
 
 <div class="col-md-10">
-<%= @activities %>
 	<div class="activity-feed">
 		<%= render partial: "feed" %>
 	</div>
@@ -36,7 +35,7 @@
 	
 </div>
 
-<div class="col-md-10 col-md-offset-5">
+<div class="col-md-10 col-md-offset-6">
 <% if @activities %>
 	<div id="infinite-scrolling-activity-feed">
   	<%= will_paginate @activities %>

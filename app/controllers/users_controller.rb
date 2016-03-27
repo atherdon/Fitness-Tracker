@@ -8,13 +8,13 @@ class UsersController < ApplicationController
   def feed
     feed = StreamRails.feed_manager.get_news_feeds(current_user.id)[:aggregated]
     results = feed.get()['results']
-    @activities = @enricher.enrich_aggregated_activities(results).paginate(:page => params[:page], :per_page => 1)
+    @activities = @enricher.enrich_aggregated_activities(results).paginate(:page => params[:page], :per_page => 5)
     #puts @activities
     #@activities = @activities.paginate(:page => params[:page], :per_page => 1)
     
     respond_to do |format|
       format.html
-      #format.js { render file: "/app/views/users/feed.js.erb" }
+      format.js { render file: "/app/views/users/feed.js.erb" }
     end
 
   end
