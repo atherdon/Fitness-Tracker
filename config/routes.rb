@@ -5,14 +5,16 @@ Rails.application.routes.draw do
   get ':any', to: redirect(subdomain: nil, path: '/%{any}'), any: /.*/
   end
 
-  devise_for :users, controllers: {sessions: "sessions"}
-
-  get '/:username' => 'users#show', as: :user
-
   get '/about' => 'static_pages#about', as: :about
   get '/contact' => 'static_pages#contact', as: :contact
   get '/terms' => 'static_pages#terms', as: :terms
   get '/donate' => 'static_pages#donate', as: :donate
+
+  devise_for :users, controllers: {sessions: "sessions"}
+
+  get '/:username' => 'users#show', as: :user
+
+  
 
   resources :users
 

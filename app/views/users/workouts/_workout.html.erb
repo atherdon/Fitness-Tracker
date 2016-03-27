@@ -1,7 +1,7 @@
 <div class="session">
 <div class="<%= workout.id %>">
 	<div class="workouts">
-	<% if params[:controller] == 'users' && params[:action] == 'index' %>
+	<% if params[:controller] == 'users' && params[:action] == 'feed' %>
 	<div class="col-md-10">
 	<% else %>
 	<div class="col-md-10 col-md-offset-1">
@@ -63,9 +63,13 @@
 
 		<% end %>
 	
+	<% if params[:controller] == 'users' && params[:action] == 'feed' %>
 	<div class="col-md-12 col-md-offset-5">
-		<br>
-		
+	<% else %>
+	<div class="col-md-12">
+	<% end %>
+	
+		<br>	
 		<h4><small><%= link_to workout.date.to_datetime.strftime("%d %b %Y"), show_workout_path(id: workout.id, username: user ), target: "_blank" %></small></h4>
 	</div>
 	</div>

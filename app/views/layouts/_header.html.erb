@@ -1,4 +1,6 @@
+<div class="container">
 <header>
+
 <% if params[:controller] == 'users' && params[:action] == 'index' && !user_signed_in? %>
 <div class="navbar navbar-nav navbar-fixed-top red-background">
 	<div class="navbar-brand navbar-header">
@@ -20,11 +22,11 @@
 
 	<div class="navbar-brand navbar-header">
 
-	<% if user_signed_in? %>
+
 	<%= link_to image_tag("smtaurus3.png"), root_path %>
-	<% else %>
-	<%= link_to image_tag("smtaurus3.png"), feed_path %>
-	<% end %>
+
+	
+
 
 	</div>
 
@@ -46,6 +48,7 @@
 
 	</div>
 </div>
+
 </header>
 
 <% if current_user %>
@@ -86,5 +89,5 @@
 <% end %>
 
 <% end %>
-
+</div>
 

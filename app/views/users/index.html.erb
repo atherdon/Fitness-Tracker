@@ -35,7 +35,7 @@
 
 
 	<div class="col-md-2 col-md-offset-4 sign-in-up">
-	<div class="col-md-12 light-background">
+	<div class="col-md-12 gray-background">
 	<br>
 	<%= form_for(:user, :url => session_path(:user)) do |f| %>
 	  <%= f.text_field :login, placeholder: "Username / Email", class: "form-control" %>
@@ -48,7 +48,7 @@
 	<hr>
 	</div>
 
-	<div class="col-md-12 light-background">
+	<div class="col-md-12 gray-background">
 	<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 	  <%= devise_error_messages! %>
 
