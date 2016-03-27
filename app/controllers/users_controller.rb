@@ -2,18 +2,21 @@ class UsersController < ApplicationController
   before_action :create_enricher
 
   def index
-    if user_signed_in? && current_user.follow_count > 0
-      feed = StreamRails.feed_manager.get_news_feeds(current_user.id)[:aggregated]
-      results = feed.get()['results']
-      @activities = @enricher.enrich_aggregated_activities(results).paginate(:page => params[:page], :per_page => 1)
-      puts @activities
-      #@activities = @activities.paginate(:page => params[:page], :per_page => 1)
-      
-      respond_to do |format|
-        format.html
-        #format.js { render file: "/app/views/users/feed.js.erb" }
-      end
+
+  end
+
+  def feed
+    feed = StreamRails.feed_manager.get_news_feeds(current_user.id)[:aggregated]
+    results = feed.get()['results']
+    @activities = @enricher.enrich_aggregated_activities(results).paginate(:page => params[:page], :per_page => 1)
+    #puts @activities
+    #@activities = @activities.paginate(:page => params[:page], :per_page => 1)
+    
+    respond_to do |format|
+      format.html
+      #format.js { render file: "/app/views/users/feed.js.erb" }
     end
+
   end
 
   def show
@@ -127,10 +130,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def feed
-    @user = current_user
-    aggregated_feed = StreamRails.feed_manager.get_news_feeds(@user.id)[:aggregated]
-  end
 
   def follow_user
     @follower = User.find_by_username(params[:username])

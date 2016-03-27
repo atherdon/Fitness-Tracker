@@ -45,7 +45,16 @@ Rails.application.routes.draw do
   post '/:username/follow_user' => 'users#follow_user', as: :follow_user
   post '/:username/unfollow_user' => 'users#unfollow_user', as: :unfollow_user
 
-  root 'users#index'
+  get '/page/:page' => 'users#feed', as: :feed
+
+
+  authenticated :user do
+    root to: "users#feed", as: :authenticated_root
+  end
+
+  unauthenticated do
+    root to: "users#index"
+  end
 
 
 

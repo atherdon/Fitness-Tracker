@@ -1,0 +1,64 @@
+<div class="container">
+
+
+<div class="row-centered">
+
+<%= link_to current_user, target: "_blank" do %>
+	<div class="col-md-2 nopadding">
+		<hr>
+
+		<div class="col-md-6 nopadding">
+		<%= image_tag Picture.where(id: current_user.before).first.attachment.url(:edit) %>
+		</div>
+		<div class="col-md-6 nopadding">
+		<%= image_tag Picture.where(id: current_user.after).first.attachment.url(:edit) %>
+		</div>
+		<div class="col-md-12 nopadding">
+		<br>
+		<p><%= current_user.username %></p>
+		<hr>
+		</div>
+
+	</div>
+
+<% end %>
+
+</div>
+
+
+
+<div class="col-md-10">
+<%= @activities %>
+	<div class="activity-feed">
+		<%= render partial: "feed" %>
+	</div>
+
+	
+</div>
+
+<div class="col-md-10 col-md-offset-5">
+<% if @activities %>
+	<div id="infinite-scrolling-activity-feed">
+  	<%= will_paginate @activities %>
+	</div>
+	<% end %>
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

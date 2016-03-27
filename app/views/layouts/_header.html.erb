@@ -20,7 +20,11 @@
 
 	<div class="navbar-brand navbar-header">
 
+	<% if user_signed_in? %>
 	<%= link_to image_tag("smtaurus3.png"), root_path %>
+	<% else %>
+	<%= link_to image_tag("smtaurus3.png"), feed_path %>
+	<% end %>
 
 	</div>
 
