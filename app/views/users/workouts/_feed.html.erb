@@ -16,7 +16,7 @@
 		<% end %>
 		
 		<div id="infinite-scrolling">
-  		<%= will_paginate @workouts %>
+  		<%= will_paginate @workouts, :params => {:controller => 'users', :action => 'show', :id => nil, :toggle_to => nil} %>
 		</div>
 
 
