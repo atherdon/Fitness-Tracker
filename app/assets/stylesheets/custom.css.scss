@@ -14,6 +14,7 @@ $gray-medium-light: #eaeaea;
 
 
 
+
 /* typography */
 
 h1 {
@@ -243,6 +244,13 @@ textarea {
   background-color: white;
 }
 
+.vertical-center {
+  min-height: 150px;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 150px; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
 
 
 
@@ -259,6 +267,13 @@ textarea {
     display: table-cell;
     vertical-align: middle;
 }
+
+
+.vcenter {
+
+  padding-margin: 10px;
+}
+
 
 .thumbnails { border:0; }
 
@@ -508,7 +523,9 @@ float: right!important;
   vertical-align: top;
 }
 
-
+.suggest-block{
+  padding-top: 5px;
+}
 
 
 
@@ -606,6 +623,27 @@ float: right!important;
   padding: 0;
 
 }
+
+.user-recomm {
+    height: 200px;
+}
+
+.border {
+  border-style: solid;
+  border-left: 1px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*flash*/

@@ -1,7 +1,97 @@
-<% if @activities %>
+<% if !@activities.blank? %>
 <% for activity in @activities %>
 	<% wrk = Workout.find(activity["activities"][0]["object"]) %>
   <%= render_activity activity, partial: "workouts/workout", partial_root: "users", locals: { workout: wrk }  %>
 <% end %>
+<% else %>
+
+	<div class="col-md-10 ">
+	<hr>
+	<div class="col-md-12 col-md-offset-4">
+	<h3>No activities yet</h3>
+	<br>
+	<h3><small>Follow more people:</small></h3>
+	<br><br>
+	</div>
+
+
+	<br>
+
+	<div class="col-md-12">
+	<div class="row-centered">
+	<% @random_users.each do |user| %>
+		<%= link_to user, target: "_blank" do %>
+
+
+			<div class="col-md-6  container nopadding suggestion">
+
+			<% if user.before && user.after %>
+				<div class="col-md-5 container vertical-center dark-background user-recomm nopadding">
+			<% else %>
+				<div class="col-md-5 container vertical-center gray-background user-recomm nopadding">
+			<% end %> 
+
+				
+					<% if user.before %>
+						<%= image_tag Picture.where(id: user.before).first.attachment.url(:thumb) %>
+					<% else %>
+					<div class="col-md-2 col-md-offset-4">
+						<span class="glyphicon glyphicon-question-sign"></span>
+					</div>
+					<% end %>
+				</div>
+
+				<% if user.before && user.after %>
+					<div class="col-md-5 container vertical-center dark-background user-recomm nopadding">
+				<% else %>
+					<div class="col-md-5 container vertical-center gray-background user-recomm nopadding">
+				<% end %> 
+
+					<% if user.after %>
+						<%= image_tag Picture.where(id: user.after).first.attachment.url(:thumb) %>
+					<% else %>
+					<div class="col-md-2 col-md-offset-4">
+						<span class="glyphicon glyphicon-question-sign"></span>
+						</div>
+					<% end %>
+				</div>
+
+
+				
+
+				<div class="col-md-12">
+				<div class="row">
+				<div class="col-md-3 col-md-offset-2 ">
+				<br>
+				<p><%= user.username %></p>
+				
+				
+
+				</div>
+
+				<div class="col-md-2 ">
+					<div class="follow suggest-block">
+						<p><%= render partial: "users/suggestion_follow", :locals => { :user => user} %></p>
+					</div>
+				</div>
+
+				</div>
+				</div>
+			</div>
+		<% end %>
+		
+		
+	<% end %>
+	</div>
+	</div>
+
+	</div>
+
 <% end %>
+
+
+
+
+
+
 

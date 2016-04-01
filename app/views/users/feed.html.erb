@@ -4,15 +4,28 @@
 <div class="row-centered">
 
 <%= link_to current_user, target: "_blank" do %>
-	<div class="col-md-2 nopadding">
+	<div class="col-md-2 container nopadding">
 		<hr>
 
-		<div class="col-md-6 nopadding">
+
+		<div class="col-md-6 container vertical-center dark-background nopadding">
+		<% if current_user.before %>
 		<%= image_tag Picture.where(id: current_user.before).first.attachment.url(:edit) %>
+		<% else %>
+
+		<% end %>
 		</div>
-		<div class="col-md-6 nopadding">
+
+
+		<div class="col-md-6 container vertical-center dark-background nopadding">
+		<% if current_user.after %>
 		<%= image_tag Picture.where(id: current_user.after).first.attachment.url(:edit) %>
+		<% else %>
+
+		<% end %>
 		</div>
+
+
 		<div class="col-md-12 nopadding">
 		<br>
 		<p><%= current_user.username %></p>

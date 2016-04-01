@@ -14,11 +14,13 @@ class User < ActiveRecord::Base
   acts_as_followable
   acts_as_follower
 
+  has_many :followable
+
   make_flaggable
   make_flagger :flag_once => true
 
   
-
+  
 
   def to_param
   	username
@@ -38,4 +40,31 @@ class User < ActiveRecord::Base
 	    errors.add(:username, :invalid)
 	  end
 	end
+
+  scope :recommended_users, (lambda do |user|
+    return all unless user.present?
+    where.not(id: user.following_users.ids << user.id)
+  end)
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

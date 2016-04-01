@@ -47,6 +47,8 @@ Rails.application.routes.draw do
   post '/:username/follow_user' => 'users#follow_user', as: :follow_user
   post '/:username/unfollow_user' => 'users#unfollow_user', as: :unfollow_user
 
+  post '/:username/suggest_follow' => 'users#suggest_follow_user', as: :suggest_follow_user
+
   get '/page/:page' => 'users#feed', as: :feed
 
 

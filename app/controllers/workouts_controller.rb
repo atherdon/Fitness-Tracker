@@ -15,6 +15,7 @@ class WorkoutsController < ApplicationController
 		exercises = params[:exercises]
 		pictures = params[:images]
 		parsed_date = DateTime.strptime(params[:date], '%m/%d/%Y')
+		@picture = Picture.new
 		@saved = false
 
 		if params[:exercises].nil?
@@ -51,7 +52,7 @@ class WorkoutsController < ApplicationController
 			if @saved == true 
 				@workouts = Workout.paginate(page: params[:page], per_page: 1).order(created_at: :desc)
 				respond_to do |format|
-					flash.now[:success] = "Workout for #{@workout.date.strftime('%D')} added."
+					#flash.now[:success] = "Workout for #{@workout.date.strftime('%D')} added."
 					format.js { render file: "/app/views/users/workouts/add_workout.js.erb" }
 				end
 			else

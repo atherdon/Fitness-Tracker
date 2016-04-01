@@ -1,0 +1,5 @@
+
+<%= form_tag suggest_follow_user_path(current_user), format: :js,  method: :post, :authenticity_token => true, remote: true do %>
+	<%= hidden_field_tag 'following_id', user.id %>
+	<%= button_tag "Follow", class: "btn btn-sm btn-default follow-button", id: 'suggestion-follow', 'data-disable-with' => "<img src='/assets/ajax-loader.gif' alt='Loading...' />" %>
+<% end %>		

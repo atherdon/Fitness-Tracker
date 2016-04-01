@@ -571,7 +571,11 @@ $(document).on('click', '#remove-session-pic', function() {
 
 });
 
+$(document).on('click', '#suggestion-follow', function() {
 
+  $(this).closest('.suggestion').remove();
+
+});
 
 
 

@@ -11,6 +11,9 @@ class UsersController < ApplicationController
     @activities = @enricher.enrich_aggregated_activities(results).paginate(:page => params[:page], :per_page => 5)
     #puts @activities
     #@activities = @activities.paginate(:page => params[:page], :per_page => 1)
+    if @activities.blank?
+      @random_users = User.recommended_users(current_user).order_by_rand.limit(10)
+    end
     
     respond_to do |format|
       format.html
@@ -136,6 +139,13 @@ class UsersController < ApplicationController
     @following = User.where(id: params[:following_id]).first
     @user = @following
 
+    if @follower == @following
+      respond_to do |format|
+        flash.now[:warning] = "Cannot follow yourself."
+        format.js {  render file: "/app/views/layouts/notice.js.erb" }
+      end
+    end
+
     if @follower.follow(@following)
       StreamRails.feed_manager.follow_user(@follower.id, @following.id)
       respond_to do |format|
@@ -144,7 +154,7 @@ class UsersController < ApplicationController
     else
       respond_to do |format|
         flash.now[:info] = "Error."
-        format.js { render file: "/app/views/users/add_flag.js.erb" }
+        format.js {  render file: "/app/views/layouts/notice.js.erb" }
       end
     end
   end
@@ -167,10 +177,24 @@ class UsersController < ApplicationController
     end
   end
 
+  def suggest_follow_user
+    @follower = User.find_by_username(params[:username])
+    @following = User.where(id: params[:following_id]).first
+    @user = @following
 
 
-
-
+    if @follower.follow(@following)
+      StreamRails.feed_manager.follow_user(@follower.id, @following.id)
+      respond_to do |format|
+        format.html { head :no_content }
+      end
+    else
+      respond_to do |format|
+        flash.now[:info] = "Error."
+        format.html { render @user }
+      end
+    end
+  end
 
 
 
