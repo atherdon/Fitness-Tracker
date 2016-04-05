@@ -1,7 +1,7 @@
 <div class="feed row row-centered">
 
 
-		<% if current_user %>
+		<% if params[:username] == current_user.username %>
 
 		<%= render 'users/workouts/add_workout' %>
 

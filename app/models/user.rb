@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   acts_as_followable
   acts_as_follower
 
-  has_many :followable
+
 
   make_flaggable
   make_flagger :flag_once => true

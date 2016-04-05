@@ -170,8 +170,13 @@ textarea {
     text-align: center;
     margin: auto;
     padding-top: 0px;
+
 }
 
+.navbar-landing {
+
+    height: 60px;
+}
 
 
 .navbar-fixed-top {
@@ -180,6 +185,11 @@ textarea {
 
 .navbar-nav li a {
  line-height: 30px; /* was 50 */
+
+}
+
+.navbar .glyphicon-chevron-left {
+  /* font-size: 0.8em; */
 }
 
 .red-background{

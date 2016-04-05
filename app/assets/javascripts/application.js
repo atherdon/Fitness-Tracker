@@ -157,7 +157,7 @@ $(document).on('page:update ready', function () {
 
 $('.fotorama').fotorama();
 
-//$('.pagination').hide();
+$('.pagination').hide();
 
 
 

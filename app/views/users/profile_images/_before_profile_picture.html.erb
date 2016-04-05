@@ -8,7 +8,7 @@
 		<div class="image dark-background">
 		<div class="delete-pic pic-right">
 			
-			<% if current_user %>
+			<% if params[:username] == current_user.username %>
 				<%= form_for @picture, url: delete_before_pic_path, method: :delete, :authenticity_token => true, html: { multipart: true }, remote: true do |f| %>
 					<%= button_tag(type: "submit", class: "btn transparent", name: "commit", value: "conceal") do %>
 	 			    <span class="glyphicon glyphicon-remove-circle red" aria-hidden="true" style="cursor:pointer"></span>
@@ -20,7 +20,7 @@
 		<%= image_tag Picture.where(id: @user.before).first.attachment.url(:index) %>
 		</div>
 	<% else %>
-		<% if current_user %>
+		<% if params[:username] == current_user.username %>
 		<div class="before-up">
 			<%= form_for @picture, url: before_picture_path, method: :post, :authenticity_token => true, html: { multipart: true }, remote: true do |f| %>
 

@@ -9,7 +9,7 @@
 	<div class="col-md-10 col-md-offset-1">
 	<hr>
 
-	<% if current_user %>
+	<% if params[:username] == current_user.username %>
 			<span class="glyphicon glyphicon glyphicon-edit" id="edit-workout" style="cursor:pointer" data-toggle="modal" data-target=".edit-workout-modal-<%= @workout.id %>" ></span>
 
 
@@ -144,7 +144,7 @@
 	</div>
 </div>
 
-<% if current_user %>
+<% if params[:username] == current_user.username %>
 <div class="modal fade edit-workout-modal-<%= @workout.id %>" id="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
   <div class="modal-dialog edit-workout-dialog modal-lg">
     <div class="modal-content">

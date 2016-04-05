@@ -33,13 +33,14 @@
 	
 	<br><br><br><br>
 
-	
+	<% if params[:username] == current_user.username %>
 	<div class="col-md-10 col-md-offset-1">
 	<hr>
 	<%= render 'users/before_after_stats/stats' %>
 	<hr>
 	</div>
-
+	<% end %> 
+	
 	<%= render 'users/workouts/feed' %>
 
 
