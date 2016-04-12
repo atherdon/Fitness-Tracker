@@ -62,16 +62,51 @@
 			</div>
 
 		<% end %>
+
+
 	
 	<% if params[:controller] == 'users' && params[:action] == 'feed' %>
 	<div class="col-md-12 col-md-offset-5">
+	<br><br><br>
 	<% else %>
 	<div class="col-md-12">
 	<% end %>
-	
-		<br>	
+
 		<h4><small><%= link_to workout.date.to_datetime.strftime("%d %b %Y"), show_workout_path(id: workout.id, username: user ), target: "_blank" %></small></h4>
+	<br>
 	</div>
+
+	<div class="">
+	<div class="col-md-12 ">
+
+	<div class="row ">
+
+	<div class="col-md-1 like">
+	<span class="glyphicon glyphicon-heart-empty"></span>
+	</div>
+
+	<div class="col-md-11 nopadding">
+
+		<%= form_tag new_comment_path(username: user.username, workout: workout.id), method: :post, :authenticity_token => true, html: { multipart: true }, remote: true do %>
+    <div class="input-group">
+    	<%= text_field_tag :comment, nil, class: "form-control", placeholder: "Add a comment..." %>
+      
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Add Comment</button>
+      </span>
+    </div>
+    <% end %>
+  </div><!-- /.col-lg-6 -->
+
+  <div class="col-md-12 comments">
+  	<%= render partial: "users/workouts/comment", locals: {workout: workout} %>
+  </div>
+
+  	
+	</div>
+	</div>
+	</div>
+
 	</div>
 
 	</div>

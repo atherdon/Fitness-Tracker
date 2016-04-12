@@ -137,7 +137,32 @@ $(document).on("click", "#cancel-edit-pics", function() {
 
 
 
+$(document).on('ready page:update', function () {
 
+// COMMENTS PAGINATION
+  $(".session").each(function() {
+
+    size_comm = $(this).find(".comment").size();
+    x=3;
+    $(this).find("div.comment:lt(3)").show();
+    if(size_comm < x ) {
+      $(this).find("#loadMore").hide()
+    }
+    
+
+  });
+
+  $(document).on("click", "#loadMore", function() {
+    size_comm = $(this).closest(".session").find(".comment").size();
+    x= (x+30 <= size_comm) ? x+40 : size_comm;
+    $(this).closest(".session").find("div.comment:lt("+x+")").show();
+    if(x >= size_comm) {
+      $(this).closest("#loadMore").hide()
+    }
+  });
+
+
+});
 
 
 

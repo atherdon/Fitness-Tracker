@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'comments/create'
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   constraints subdomain: 'www' do
   get ':any', to: redirect(subdomain: nil, path: '/%{any}'), any: /.*/
@@ -51,6 +53,10 @@ Rails.application.routes.draw do
 
   get '/page/:page' => 'users#feed', as: :feed
 
+  post '/:username/:workout/new_comment' => 'comments#create', as: :new_comment
+
+
+
 
   authenticated :user do
     root to: "users#feed", as: :authenticated_root
@@ -63,3 +69,12 @@ Rails.application.routes.draw do
 
 
 end
+
+
+
+
+
+
+
+
+

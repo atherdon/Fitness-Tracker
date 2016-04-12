@@ -1,0 +1,25 @@
+<div class="nopadding">
+<hr>
+</div>
+
+
+<% @comments = workout.comments.order('created_at DESC') %>
+<% @comments.each do |com| %>
+	
+	<div class="comment" style="display:none;">
+	<% user = User.find(com.user_id) %>
+
+
+	<%= link_to "#{user.username}", user_path(user) %>
+
+	<%= com.comment %>
+	<br>
+	</div>
+	
+<% end %>
+<br>
+<div id="loadMore">Load more comments</div>
+
+<div class="nopadding">
+
+</div>

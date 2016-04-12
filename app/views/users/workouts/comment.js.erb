@@ -1,0 +1,1 @@
+$(".activity-feed").find(".<%= @workout.id %>").find(".comments").html('<%= j render partial: 'users/workouts/comment', locals: {:workout => @workout} %>');

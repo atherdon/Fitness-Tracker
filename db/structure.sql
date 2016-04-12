@@ -44,6 +44,42 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: comments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE comments (
+    id integer NOT NULL,
+    title character varying(50) DEFAULT ''::character varying,
+    comment text,
+    commentable_id integer,
+    commentable_type character varying,
+    user_id integer,
+    role character varying DEFAULT 'comments'::character varying,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE comments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
+
+
+--
 -- Name: exercises; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -413,6 +449,13 @@ ALTER SEQUENCE xsets_id_seq OWNED BY xsets.id;
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY exercises ALTER COLUMN id SET DEFAULT nextval('exercises_id_seq'::regclass);
 
 
@@ -477,6 +520,14 @@ ALTER TABLE ONLY workouts ALTER COLUMN id SET DEFAULT nextval('workouts_id_seq':
 --
 
 ALTER TABLE ONLY xsets ALTER COLUMN id SET DEFAULT nextval('xsets_id_seq'::regclass);
+
+
+--
+-- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY comments
+    ADD CONSTRAINT comments_pkey PRIMARY KEY (id);
 
 
 --
@@ -578,6 +629,27 @@ CREATE INDEX fk_followables ON follows USING btree (followable_id, followable_ty
 --
 
 CREATE INDEX fk_follows ON follows USING btree (follower_id, follower_type);
+
+
+--
+-- Name: index_comments_on_commentable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_comments_on_commentable_id ON comments USING btree (commentable_id);
+
+
+--
+-- Name: index_comments_on_commentable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_comments_on_commentable_type ON comments USING btree (commentable_type);
+
+
+--
+-- Name: index_comments_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_comments_on_user_id ON comments USING btree (user_id);
 
 
 --
@@ -824,4 +896,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160315170750');
 INSERT INTO schema_migrations (version) VALUES ('20160315222635');
 
 INSERT INTO schema_migrations (version) VALUES ('20160321204833');
+
+INSERT INTO schema_migrations (version) VALUES ('20160407180034');
 

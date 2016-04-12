@@ -68,6 +68,7 @@ gem 'make_flaggable', :git => 'git://github.com/medihack/make_flaggable.git'
 gem "acts_as_follower"
 gem 'stream_rails'
 gem 'acts_as_commentable'
+gem 'acts_as_votable', '~> 0.10.0'
 
 
 group :development, :test do
