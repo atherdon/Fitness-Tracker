@@ -8,6 +8,7 @@ class Workout < ActiveRecord::Base
 
   make_flaggable
   acts_as_commentable
+  acts_as_votable
 
   include StreamRails::Activity
   as_activity

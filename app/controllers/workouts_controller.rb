@@ -140,6 +140,25 @@ class WorkoutsController < ApplicationController
 
 	end
 
+	def like
+		@user = User.find(params[:username])
+		@workout = Workout.find(params[:workout])
+		if current_user.likes @workout
+			respond_to do |format|
+				format.js { render file: "/app/views/users/like.js.erb" }
+			end
+		else
+			flash.now[:error] = "Error."	
+			respond_to do |format|
+				format.js { render file: "/app/views/layouts/notice.js.erb" }
+			end
+		end
+	end
+
+	def unlike
+
+	end
+
 private
 
 	def check_user

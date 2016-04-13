@@ -41,7 +41,9 @@ $(document).on("change", ".workout-pics input:file", function() {
         case 'jpg':
         case 'jpeg':
         case 'png':
-        case 'gif':
+        case 'JPG':
+        case 'JPEG':
+        case 'PNG':
             $('#workout-pics').attr('disabled', false);
             break;
         default:
@@ -140,7 +142,10 @@ $(document).on("click", "#cancel-edit-pics", function() {
 $(document).on('ready page:update', function () {
 
 // COMMENTS PAGINATION
+
   $(".session").each(function() {
+    $(this).find("#comment-input").val("");
+    $(this).find("#comment-input").blur();
 
     size_comm = $(this).find(".comment").size();
     x=3;

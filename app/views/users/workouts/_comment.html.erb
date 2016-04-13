@@ -1,9 +1,14 @@
-<div class="nopadding">
-<hr>
-</div>
-
 
 <% @comments = workout.comments.order('created_at DESC') %>
+<% if @comments.blank? %>
+
+<% else %>
+<hr>
+<% end %>
+
+
+
+
 <% @comments.each do |com| %>
 	
 	<div class="comment" style="display:none;">

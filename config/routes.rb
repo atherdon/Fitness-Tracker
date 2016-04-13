@@ -55,7 +55,8 @@ Rails.application.routes.draw do
 
   post '/:username/:workout/new_comment' => 'comments#create', as: :new_comment
 
-
+  post '/:username/:workout/like' => 'workouts#like', as: :like
+  post '/:username/:workout/unlike' => 'workouts#unlike', as: :unlike
 
 
   authenticated :user do
