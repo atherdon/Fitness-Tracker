@@ -114,8 +114,8 @@
 	<div class="col-md-10 col-md-offset-1">
 		<div class="row ">
 
-		<div class="col-md-1 like">
-		<span class="glyphicon glyphicon-heart-empty"></span>
+		<div class="like-dislike">
+			<%= render partial: "users/like", locals: {workout: @workout, user: @user} %>
 		</div>
 
 		<div class="col-md-11 nopadding">
