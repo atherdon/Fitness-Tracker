@@ -38,7 +38,7 @@
 		<% @row_index = 0 %>
 		<% workout.exercises.each_with_index do |ex, index| %>
 		
-			<div class="col-md-3">
+			<div class="col-md-3 row-centered">
 			<div class="panel panel-default">
 				<div class="panel-heading"><%= ex.name %></div>
 				<small>
@@ -81,17 +81,18 @@
 		<div class="row ">
 
 
-
-		<%= render partial: "users/like", locals: {workout: workout} %>
+		<div class="like-dislike">
+			<%= render partial: "users/like", locals: {workout: workout, user: user} %>
+		</div>
 
 		<div class="col-md-11 nopadding">
 
 			<%= form_tag new_comment_path(username: user.username, workout: workout.id), method: :post, :authenticity_token => true, html: { multipart: true }, remote: true do %>
 	    <div class="input-group">
-	    	<%= text_field_tag :comment, nil, class: "form-control", placeholder: "Add a comment...", id: "comment-input" %>
+	    	<%= text_field_tag :comment, nil, class: "form-control", placeholder: "Add a comment...", id: "comment-input", style: "height: 46.36px;" %>
 	      
 	      <span class="input-group-btn">
-	        <%= submit_tag "Add Comment", class: "btn btn-default" %>
+	        <%= button_tag "Add Comment", class: "btn btn-default", style: "height: 46.36px;", 'data-disable-with' => "<img src='/assets/ajax-loader.gif'/>" %>
 	      </span>
 	    </div>
 	    <% end %>

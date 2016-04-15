@@ -167,12 +167,29 @@ $(document).on('ready page:update', function () {
   });
 
 
+
 });
 
 
 
+// LIKE AND DISLIKE
+
+$(document).on('ready', function () {
+
+$(document).on("click", ".like", function() {
+    $(this).closest('.like-dislike').find('.like-submit').unbind("click")
+    $(this).closest('.like-dislike').find('.like-submit').unbind("submit");
+    $(this).closest('.like-dislike').find('.like-submit').submit();
+});
 
 
+$(document).on('click', '.unlike', function () {
+    $(this).closest('.like-dislike').find('.unlike-submit').unbind("click")
+    $(this).closest('.like-dislike').find('.unlike-submit').unbind("submit");
+    $(this).closest('.like-dislike').find('.unlike-submit').submit()
+});
+
+});
 
 
 
@@ -188,6 +205,7 @@ $(document).on('page:update ready', function () {
 $('.fotorama').fotorama();
 
 $('.pagination').hide();
+
 
 
 

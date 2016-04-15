@@ -333,7 +333,15 @@ textarea {
 
 }
 
-.like:hover {
+.like-block h4{
+
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+small { display: block }
+
+.like-block:hover {
 
     .glyphicon-heart-empty {
       opacity:0.7;
