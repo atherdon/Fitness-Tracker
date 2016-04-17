@@ -5,6 +5,11 @@ class UsersController < ApplicationController
 
   end
 
+  def search
+    render json: User.search(params[:query], autocomplete: true, limit: 10).map do |user| {name: user.username}
+    end
+  end
+
   def feed
     feed = StreamRails.feed_manager.get_news_feeds(current_user.id)[:aggregated]
     results = feed.get()['results']

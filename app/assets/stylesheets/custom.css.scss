@@ -80,6 +80,8 @@ h2, .h2 {
 
 body {
   padding-top: 60px;
+   overflow-x: hidden;
+  
 }
 
 section {
@@ -112,6 +114,11 @@ textarea {
 /* centered columns styles */
 .row-centered {
     text-align:center;
+}
+
+.row {
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
 .row-left {
@@ -276,6 +283,13 @@ textarea {
 .container-table {
     display: table;
 }
+
+.container {
+   max-width: 100%;
+   /* This will remove the outer padding, and push content edge to edge */
+   padding-right: 0;
+   padding-left: 0;
+ }
 
 .vertical-center-row {
     display: table-cell;
@@ -679,9 +693,13 @@ float: right!important;
     cursor:pointer;
 }
 
+.verticalLine {
+    border-left: thick solid #F8F8F8;
+}
 
-
-
+.search-input {
+  padding-left: 0px;
+}
 
 
 

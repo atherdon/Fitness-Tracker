@@ -35,8 +35,8 @@
 			<li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
 		</ul>
 
-		<% if params[:username] != current_user.username %>
-			<% if params[:username] && params[:id] %>
+		<% if params[:username] != current_user.username && params[:id] %>
+
 				<ul class="nav navbar-nav navbar-left">
 					<li>
 					<%= link_to user_path(params[:username]) do %>
@@ -45,18 +45,26 @@
 					<% end %>
 					</li>
 				</ul>
-			<% end %>
 
-		<% else %>
+		<% elsif params[:username].present? %>
 			<ul class="nav navbar-nav navbar-left">
-					<li>
-					<%= link_to root_path do %>
-						<span class="glyphicon glyphicon-chevron-left"></span>				
-						Feed
-					<% end %>
-					</li>
-				</ul>
+				<li>
+				<%= link_to root_path do %>
+					<span class="glyphicon glyphicon-chevron-left"></span>				
+					Feed
+				<% end %>
+				</li>
+			</ul>
 		<% end %>
+
+		<ul class="nav navbar-nav navbar-left nopadding verticalLine">
+
+			<li>
+			<%= link_to('javascript:void(0)', :id => 'search-input', style: "") do %>
+			<input class="typeahead-username form-control" type="text" autocomplete="off" placeholder="Search">
+			<% end %>
+			</li>
+		</ul>
 
 	<% else %>
 		<ul class="nav navbar-nav navbar-right">

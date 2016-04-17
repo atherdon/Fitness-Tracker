@@ -92,7 +92,6 @@ $(document).on("click", "#cancel-pics", function() {
 
 
 
-
 $(document).on("change", ".edit-workout-pics input:file", function() {
   var ext = this.value.match(/\.(.+)$/)[1];
     switch (ext) {
@@ -435,9 +434,46 @@ $('#flash').delay(200).fadeIn('normal', function() {
 
 //--- TYPEAHEAD WORKOUT FUNCTION ---
 
-$(document).on(' ready', function () {
+$(document).on('ready', function () {
+
+// User search typeahead
+
+var usernames = new Bloodhound({
+  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('username'),
+  queryTokenizer: Bloodhound.tokenizers.whitespace,
+  remote: {
+    url: '/username/%QUERY',
+    wildcard: '%QUERY'
+  }
+});
+
+$('.typeahead-username').each(function(index, element) {
+  $(element).typeahead(null, {
+    display: 'username',
+    source: usernames,
+    minLength: 1,
+    highlight: true
+  })
+});
+
+$('.typeahead-username').each(function(index, element) {
+  $(element).bind('typeahead:selected', function(event, datum, name) {
+
+    
+    var name = datum.username
+    var pathname = window.location.pathname;
+    window.location.pathname = name
+
+    
 
 
+  })
+
+});
+
+
+
+// Workout typeahead
 
 var types = new Bloodhound({
   datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),

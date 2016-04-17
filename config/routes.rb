@@ -58,6 +58,8 @@ Rails.application.routes.draw do
   post '/:username/:workout/like' => 'workouts#like', as: :like
   post '/:username/:workout/unlike' => 'workouts#unlike', as: :unlike
 
+  get 'username/:query' => 'users#search'
+
 
   authenticated :user do
     root to: "users#feed", as: :authenticated_root

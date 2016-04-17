@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   has_many :workouts, dependent: :destroy
   has_many :suggestions, dependent: :destroy
 
+  searchkick text_start: [:username], autocomplete: ['username']
+
   acts_as_followable
   acts_as_follower
   acts_as_voter
