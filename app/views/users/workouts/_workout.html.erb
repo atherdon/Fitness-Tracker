@@ -38,9 +38,14 @@
 		<% @row_index = 0 %>
 		<% workout.exercises.each_with_index do |ex, index| %>
 		
+			<% if root_path %>
 			<div class="col-md-3 row-centered">
+			<% else %>
+			<div class="col-md-2 row-centered">
+			<% end %>
+
 			<div class="panel panel-default">
-				<div class="panel-heading"><%= ex.name %></div>
+				<div class="panel-heading"><%= ex.name.gsub('-', ' ') %></div>
 				<small>
 				<table class="table">
 					<tr>
