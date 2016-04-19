@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   has_many :workouts, dependent: :destroy
   has_many :suggestions, dependent: :destroy
 
-  searchkick text_start: [:username], autocomplete: ['username'], batch_size: 200
+  searchkick text_start: [:username], autocomplete: ['username'], batch_size: 200, callbacks: :async
 
   acts_as_followable
   acts_as_follower

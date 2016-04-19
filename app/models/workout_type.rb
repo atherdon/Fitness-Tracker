@@ -1,4 +1,4 @@
 class WorkoutType < ActiveRecord::Base
-	searchkick 
+	searchkick text_start: [:name], autocomplete: ['name'], callbacks: :async
 
 end
