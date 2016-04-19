@@ -14,7 +14,7 @@ class ProfileUploader < CarrierWave::Uploader::Base
 
   version :edit do
     process convert: 'png'
-    process :resize_to_fill => [96, 150]
+    process :resize_to_fill => [98, 150]
   end
 
   version :thumb do

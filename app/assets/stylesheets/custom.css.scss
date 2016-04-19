@@ -116,13 +116,14 @@ textarea {
     text-align:center;
 }
 
-.row {
-  margin-left: 0px;
-  margin-right: 0px;
-}
+
 
 .row-left {
   text-align:left;
+}
+
+.row-right {
+  text-align:right;
 }
 
 .pic-right {
@@ -177,7 +178,7 @@ textarea {
 {
     position: absolute;
     width: 100%;
-    left: 21px; /* was 26 */
+    left: 8px; /* was 26 */
     text-align: center;
     margin: auto;
     padding-top: 0px;
