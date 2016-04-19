@@ -88,7 +88,9 @@ Rails.application.configure do
   :password       => ENV['SENDGRID_PASSWORD'],
   :domain         => ENV['SENDGRID_DOMAIN']
   
-}
+  }
+
+  Elasticsearch::Model.client = Elasticsearch::Client.new host: ENV['SEARCHBOX_URL']
 end
 
 

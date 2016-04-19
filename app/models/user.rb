@@ -21,7 +21,8 @@ class User < ActiveRecord::Base
   make_flaggable
   make_flagger :flag_once => true
 
-  
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
   
 
   def to_param
