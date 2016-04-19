@@ -10,12 +10,18 @@ class UsersController < ApplicationController
     end
   end
 
+  def notification
+    notif_feed = StreamRails.feed_manager.get_notification_feed(current_user.id)
+    notif_results = results = notif_feed.get()['results']
+    @notifications = @enricher.enrich_aggregated_activities(notif_results).paginate(:page => params[:page], :per_page => 5)
+  end
+
   def feed
-    feed = StreamRails.feed_manager.get_news_feeds(current_user.id)[:aggregated]
-    results = feed.get()['results']
-    @activities = @enricher.enrich_aggregated_activities(results).paginate(:page => params[:page], :per_page => 5)
-    #puts @activities
-    #@activities = @activities.paginate(:page => params[:page], :per_page => 1)
+    feed = StreamRails.feed_manager.get_news_feeds(current_user.id)[:flat]
+    @results = feed.get()['results']
+    @activities = @enricher.enrich_activities(@results).paginate(:page => params[:page], :per_page => 10)
+
+
     if @activities.blank?
       @random_users = User.recommended_users(current_user).order_by_rand.limit(10)
     end

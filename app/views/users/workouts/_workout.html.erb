@@ -38,10 +38,10 @@
 		<% @row_index = 0 %>
 		<% workout.exercises.each_with_index do |ex, index| %>
 		
-			<% if root_path %>
-			<div class="col-md-3 row-centered">
-			<% else %>
+			<% if params[:username].present? %>
 			<div class="col-md-2 row-centered">
+			<% else %>
+			<div class="col-md-3 row-centered">
 			<% end %>
 
 			<div class="panel panel-default">
@@ -77,7 +77,7 @@
 	<div class="col-md-12">
 	<% end %>
 
-		<h4><small><%= link_to workout.date.to_datetime.strftime("%d %b %Y"), show_workout_path(id: workout.id, username: user ), target: "_blank" %></small></h4>
+		<h4><small><%= link_to workout.date.to_datetime.strftime("%d %b %Y"), show_workout_path(id: workout.id, username: user ) %></small></h4>
 	<br>
 	</div>
 
