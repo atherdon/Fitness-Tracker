@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
 
   searchkick text_start: [:username], autocomplete: ['username'], batch_size: 200, callbacks: :async
 
+  
+
   acts_as_followable
   acts_as_follower
   acts_as_voter
