@@ -510,7 +510,7 @@ $('.typeahead').each(function(index, element) {
 
 		wrapper = $(this).closest('.input-group').nextAll('.weight_fields_wrap');
 
-    if ( $('.'+name)[0]) {
+    if ( $(wrapper).nextAll('.'+name)[0]) {
       return false;
     }
  
