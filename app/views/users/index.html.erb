@@ -48,7 +48,7 @@
 	  <%= f.password_field :password, placeholder: "Password", class: "form-control" %>
 	  <%= f.check_box :remember_me %>
 	  <%= f.label :remember_me %>
-	  <%= f.submit 'Sign in', class: "btn btn-info form-control" %>
+	  <%= f.button 'Sign in', class: "btn btn-info form-control", 'data-disable-with' => "<img src='/assets/ajax-loader.gif' alt='Loading...' />" %>
 	  <%= link_to "Forgot your password?", new_password_path(:user) %>
 	<% end %>
 	<hr>
@@ -79,7 +79,7 @@
 
 	  <div class="actions">
 	  	<br>
-	    <%= f.submit "Sign up", class: "btn btn-danger form-control" %>
+	    <%= f.button "Sign up", class: "btn btn-danger form-control", 'data-disable-with' => "<img src='/assets/ajax-loader.gif' alt='Loading...' />" %>
 	  </div>
 	  <br>
 	<% end %>

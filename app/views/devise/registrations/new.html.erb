@@ -25,7 +25,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up", class: "btn btn-success form-control" %>
+    <%= f.button "Sign up", class: "btn btn-success form-control", 'data-disable-with' => "<img src='/assets/ajax-loader.gif' alt='Loading...' />" %>
   </div>
 <% end %>
 <br><hr>
