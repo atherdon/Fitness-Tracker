@@ -16,18 +16,24 @@
 		<div class="follow follow-block">
 			<%= render partial: "users/follow" %>
 		</div>
+		<span class="glyphicon glyphicon-option-horizontal margin" style="cursor:pointer" data-toggle="modal" data-target=".user-modal"></span>	
 	</div>
 	</h2>
 
 	<div class="col-md-6 col-md-offset-4">
 		<div class="user-stats">
 			<h3><small>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			
 			<b><%= @user.workouts.count %></b> sessions
 			&nbsp;
+			<span style="cursor:pointer" data-toggle="modal" data-target=".followers-modal">
 			<b><%= @user.followers_count %></b> followers
+			</span>
 			&nbsp;
+			<span style="cursor:pointer" data-toggle="modal" data-target=".following-modal">
 			<b><%= @user.all_following.count %></b> following 
+			</span>
+			
 			</small></h3>
 		</div>
 	</div>
@@ -46,6 +52,11 @@
 
 
 </div>
+
+
+
+
+
 
 <% if user_signed_in? %>
 <div class="modal fade user-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
@@ -69,6 +80,129 @@
 
 				<button type="button" class="btn btn-default btn-lg col-md-12" data-dismiss="modal" aria-hidden="true">Cancel</button>
      	
+    </div>
+  </div>
+</div>
+
+<div class="modal followers-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content white-background">
+
+    <% @user.followers.each do |user| %>
+    	<div class="  vertical-center">
+    	<div class="col-md-4">
+	    	<div class="col-md-8 container nopadding">
+
+				<% if user.before && user.after %>
+					<div class="col-md-6 container vertical-center nopadding row-right">
+				<% else %>
+					<div class="col-md-6 container vertical-center gray-background nopadding">
+				<% end %> 
+
+				<% if user.before %>
+				<%= image_tag Picture.where(id: user.before).first.attachment.url(:edit) %>
+				<% else %>
+					<div class="col-md-2 col-md-offset-3">
+								<span class="glyphicon glyphicon-question-sign"></span>
+							</div>
+				<% end %>
+				</div>
+
+
+				<% if user.before && user.after %>
+					<div class="col-md-6 container vertical-center nopadding row-left">
+				<% else %>
+					<div class="col-md-6 container vertical-center gray-background nopadding">
+				<% end %> 
+
+				<% if user.after %>
+				<%= image_tag Picture.where(id: user.after).first.attachment.url(:edit) %>
+				<% else %>
+					<div class="col-md-2 col-md-offset-3">
+								<span class="glyphicon glyphicon-question-sign"></span>
+							</div>
+				<% end %>
+				</div>
+
+			</div>
+
+			<div class="col-md-4 vertical-center">
+    	<%= link_to user.username, user %>
+    	</div>
+
+    	</div>
+
+
+
+    	<br><br><br><br><br><br><br><br>
+    	</div>
+
+    <% end %> 
+
+
+     	
+    </div>
+  </div>
+</div>
+
+<div class="modal fade following-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+    	<% @user.all_following.each do |user| %>
+	    	<div class="  vertical-center">
+	    	<div class="col-md-4">
+	    	<div class="col-md-8 container nopadding">
+
+					<% if user.before && user.after %>
+						<div class="col-md-6 container vertical-center nopadding row-right">
+					<% else %>
+						<div class="col-md-6 container vertical-center gray-background nopadding">
+					<% end %> 
+
+					<% if user.before %>
+					<%= image_tag Picture.where(id: user.before).first.attachment.url(:edit) %>
+					<% else %>
+						<div class="col-md-2 col-md-offset-3">
+									<span class="glyphicon glyphicon-question-sign"></span>
+								</div>
+					<% end %>
+					</div>
+
+
+					<% if user.before && user.after %>
+						<div class="col-md-6 container vertical-center nopadding row-left">
+					<% else %>
+						<div class="col-md-6 container vertical-center gray-background nopadding">
+					<% end %> 
+
+					<% if user.after %>
+					<%= image_tag Picture.where(id: user.after).first.attachment.url(:edit) %>
+					<% else %>
+						<div class="col-md-2 col-md-offset-3">
+									<span class="glyphicon glyphicon-question-sign"></span>
+								</div>
+					<% end %>
+					</div>
+
+				</div>
+
+				<div class="col-md-4 vertical-center">
+	    	<%= link_to user.username, user %>
+	    	</div>
+
+				</div>
+
+				
+
+
+
+
+	    	<br><br><br><br><br><br><br><br>
+	    	</div>
+
+	    <% end %> 
+
     </div>
   </div>
 </div>

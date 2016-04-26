@@ -160,7 +160,7 @@ class UsersController < ApplicationController
     if @follower.follow(@following)
       StreamRails.feed_manager.follow_user(@follower.id, @following.id)
       respond_to do |format|
-        format.js { render file: "/app/views/users/follow.js.erb" }
+        format.js { render file: "/app/views/users/follow.js.erb", :locals => {:user => @user} }
       end
     else
       respond_to do |format|
@@ -178,7 +178,7 @@ class UsersController < ApplicationController
     if @follower.stop_following(@following)  
       StreamRails.feed_manager.unfollow_user(@follower.id, @following.id)
       respond_to do |format|
-        format.js { render file: "/app/views/users/follow.js.erb" }
+        format.js { render file: "/app/views/users/follow.js.erb", :locals => {:user => @user} }
       end
     else
       respond_to do |format|
